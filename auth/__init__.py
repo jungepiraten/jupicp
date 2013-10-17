@@ -110,8 +110,6 @@ class User(DirectoryResult):
 
 	def set_display_name(self, common_name):
 		conn = self.directory.generate_connection()
-		print({"cn": self.attrs["cn"] if "cn" in self.attrs else []})
-		print({"cn": str(common_name)})
 		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
 			"cn": self.attrs["cn"] if "cn" in self.attrs else []
 		}, {
@@ -139,8 +137,6 @@ class User(DirectoryResult):
 			if m['mail'] == external_mail:
 				m['verified'] = True
 			external_mails.append(m)
-		print(self.external_mails)
-		print(external_mails)
 		self.set_external_mails(external_mails)
 	
 	def add_external_mail(self, external_mail):

@@ -17,7 +17,6 @@ class LogoutView(RedirectView):
 	permanent = False
 
 	def get_redirect_url(self):
-		print(self.request.session)
 		if "user" in self.request.session:
 			del(self.request.session["user"])
 		return reverse_lazy("login")
