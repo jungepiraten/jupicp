@@ -1,0 +1,7 @@
+{% extends "jupicp/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<a href="{% url "membership_connect" %}">{% trans "Connect membership" %}</a>
+<a href="{% url "membership_join" %}">{% trans "Become member" %}</a>
+{% endblock %}

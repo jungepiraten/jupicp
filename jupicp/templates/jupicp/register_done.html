@@ -1,0 +1,12 @@
+{% extends "jupicp/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="jumbotron">
+ <div class="container">
+  <h1>{% trans "Ready!" %}</h1>
+  <p>{% trans "We registered your account succesfully. Check your mails to gather your initial password" %}</p>
+  <a href="{% url "login" %}" class="btn btn-lg btn-primary">{% trans "Login" %}</a>
+ </div>
+</div>
+{% endblock %}

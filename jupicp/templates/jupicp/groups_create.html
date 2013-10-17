@@ -1,0 +1,15 @@
+{% extends "jupicp/base.html" %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block content %}
+<h1>{% trans "Create group" %}</h1>
+
+<form action="{% url "groups_create" %}" method="post">
+ {% csrf_token %}
+ {{ form|bootstrap }}
+ <div class="form-actions">
+  <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+ </div>
+</form>
+{% endblock %}

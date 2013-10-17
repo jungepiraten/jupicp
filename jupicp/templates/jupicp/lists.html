@@ -1,0 +1,28 @@
+{% extends "jupicp/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p class="lead">{% trans "Here you find a list of our (public) mailinglists. Note that you can read them on our <a href=\"//forum.junge-piraten.de\">Webforum</a> too. They are also available as shared Folders." %}</p>
+<form action="{% url "lists" %}" method="post">
+ {% csrf_token %}
+ <table class="table table-condensed table-striped">
+  <thead>
+   <tr>
+    <th>{% trans "List" %}</th>
+    <th>{% trans "Description" %}</th>
+    <th>{% trans "Subscription" %}</th>
+   </tr>
+  </thead>
+  {% for listname, list in lists %}
+   <tr>
+    <th><i class="glyphicon glyphicon-envelope"></i> {{ list.real_name }}</th>
+    <td>{{ list.description }}</td>
+    <td><select name="subscription_{{listname}}"><option></option>{% for mail in mails %}<option {% if mail.mail in list.members %}selected="selected"{% endif %}>{{ mail.mail }}</option>{% endfor %}</select></td>
+   </tr>
+  {% endfor %}
+ </table>
+ <div class="form-actions">
+  <button type="submit" class="btn btn-primary pull-right">{% trans "Save" %}</button>
+ </div>
+</form>
+{% endblock %}

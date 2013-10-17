@@ -1,0 +1,16 @@
+{% extends "jupicp/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Groups" %}</h1>
+
+<p class="lead">{% trans "Groups define your access-rights in many services. You may join some of the groups by yourself, others might require an invitation." %}</p>
+
+{% if may_create %}<a href="{% url "groups_create" %}" class="btn btn-success">{% trans "Create" %}</a>{% endif %}
+
+<ul>
+ {% for group in groups %}
+  <li><a href="{% url "groups_detail" group.name %}">{{ group.display_name }}</a></li>
+ {% endfor %}
+</ul>
+{% endblock %}

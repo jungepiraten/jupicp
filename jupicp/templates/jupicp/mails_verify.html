@@ -1,0 +1,11 @@
+{% extends "jupicp/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="jumbotron">
+ <div class="container">
+  <h1>{% trans "Congratulations" %}</h1>
+  <p>{% trans "You verified your mailadress to use it." %}</p>
+  <a href="{% url "dashboard" %}" class="btn btn-lg btn-primary">{% trans "Continue" %}</a> </div>
+</div>
+{% endblock %}

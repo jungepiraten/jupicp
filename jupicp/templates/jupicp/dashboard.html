@@ -1,0 +1,64 @@
+{% extends "jupicp/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>Hallo {{user.name}}</h1>
+
+  {% if user.member_id %}
+   <p>Deine Junge-Piraten-Mitgliedsnummer: {{user.member_id}}</p>
+  {% endif %}
+
+<div class="row">
+ <div class="col-md-6">
+  <div class="panel panel-primary">
+   <div class="panel-heading"><h3 class="panel-title">{% trans "Your mailadresses" %}</h3></div>
+   <div class="panel-body">
+    {% if user.mail %}
+     <p class="lead">{% blocktrans with mail=user.mail %}Your Mailadress in our system is <strong>{{mail}}</strong>. If you want to change it, feel free to contact <a href="mailto:bofh@junge-piraten.de">us</a>{% endblocktrans %}</p>
+    {% endif %}
+    <table>
+     {% for mail in user.external_mails %}
+      <tr>
+       <td><a href="{% url "mails_del" mail.mail %}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash" title="{% trans "remove mailaddress" %}"></i></a></td>
+       <td>
+        {% if mail.verified %}
+         <p class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok" title="{% trans "verified mailaddress" %}"></i></p>
+        {% else %}
+         <a href="{% url "mails_verify_send" mail.mail %}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-repeat" title="{% trans "resend confirmationlink" %}"></i></a>
+        {% endif %}
+       </td>
+       <th>{{ mail.mail }}</th>
+      </tr>
+     {% endfor %}
+     <tr>
+      <td colspan="3">
+       <form action="{% url "mails_add" %}" method="post" class="form-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-plus" title="{% trans "add mailaddress" %}"></i></button>
+        <div class="form-group">
+         <input type="text" class="form-control input-sm" name="mail" placeholder="{% trans "mailaddress" %}" />
+        </div>
+       </form>
+      </td>
+     </tr>
+    </table>
+   </div>
+  </div>
+ </div>
+ <div class="col-md-6">
+  <div class="panel panel-primary">
+   <div class="panel-heading"><h3 class="panel-title">{% trans "Your groupmemberships" %}</h3></div>
+   <div class="panel-body">
+    <table>
+     {% for group in user.get_groups %}
+      <tr>
+       <td><a href="{% url "groups_member_del" group.name user.name %}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-log-out" title="{% trans "leave group" %}"></i></a></td>
+       <th><a href="{% url "groups_detail" group.name %}">{{ group.display_name }}</a></th>
+      </tr>
+     {% endfor %}
+    </table>
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

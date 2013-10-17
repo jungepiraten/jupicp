@@ -1,0 +1,3 @@
+[submodule "django-recaptcha-form"]
+	path = django-recaptcha-form
+	url = https://github.com/ntucker/django-recaptcha-form

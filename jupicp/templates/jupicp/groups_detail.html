@@ -1,0 +1,49 @@
+{% extends "jupicp/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{{ group.display_name }}</h1>
+
+<div class="row">
+ <div class="col-md-9">  
+  <p class="lead">{{ group.description }}</p> 
+
+  {% if not is_member and may_join %}
+   <a href="{% url "groups_member_add" group.name user.name %}" class="btn btn-success">{% trans "Join" %}</a>
+  {% elif is_member %}
+   <a href="{% url "groups_member_del" group.name user.name %}" class="btn btn-danger">{% trans "Leave" %}</a>
+  {% endif %}
+  {% if may_edit %}
+  {% endif %}
+ </div>
+
+ <div class="col-md-3">
+  <div class="panel panel-primary">
+   <div class="panel-heading"><h3 class="panel-title">{% trans "Members" %}</h3></div>
+   <div class="panel-body">
+    <table>
+     {% for member in group.get_members %}
+      <tr>
+       <td>{% if may_edit %}<a href="{% url "groups_member_del" group.name member.name %}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash" title="{% trans "remove member" %}"></i></a>{% endif %}</td>
+       <th>{{ member.name }}</th>
+      </tr>
+     {% endfor %}
+     {% if may_edit %}
+      <tr>
+       <td colspan="2">
+        <form action="{% url "groups_member_add" group.name %}" method="post" class="form-inline">
+         {% csrf_token %}
+         <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-plus" title="{% trans "add user" %}"></i></button>
+         <div class="form-group">
+          <input type="text" class="form-control input-sm" name="user" placeholder="{% trans "username" %}" />
+         </div>
+        </form>
+       </td>
+      </tr>
+     {% endif %}
+    </table>
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

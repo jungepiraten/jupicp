@@ -1,0 +1,44 @@
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="de">
+ <head>
+  <title>JuPiCP &middot; {% block title %}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="{% static "bootstrap-3.0.0/css/bootstrap.min.css" %}">
+ </head>
+ <body>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+   <div class="container">
+   <a href="{% url "dashboard" %}" class="navbar-brand">JuPiCP</a>
+   <ul class="nav navbar-nav">
+    <li><a href="{% url "profile" %}"><i class="glyphicon glyphicon-user" title=""></i> {% trans "Profile" %}</a></li>
+    <li><a href="{% url "groups" %}"><i class="glyphicon glyphicon-tags" title=""></i> {% trans "Groups" %}</a></li>
+    <li><a href="{% url "lists" %}"><i class="glyphicon glyphicon-list" title=""></i> {% trans "Mailinglists" %}</a></li>
+<!--    <li><a href="{% url "membership" %}"><i class="glyphicon glyphicon-tower" title=""></i> {% trans "Membership" %}</a></li> -->
+   </ul>
+   <div class="navbar-right">
+    {% if user %}
+     <p class="navbar-text">{{ user.name }}</p>
+     <a href="{% url "logout" %}" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-log-out" title="{% trans "Logout" %}"></i></a>
+    {% else %}
+     <a href="{% url "register" %}" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-cog" title="{% trans "Sign up" %}"></i></a>
+     <a href="{% url "login" %}" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-log-in" title="{% trans "Login" %}"></i></a>
+    {% endif %}
+   </div>
+   </div>
+  </nav>
+
+  <div class="container">
+   {% block toolbar %}{% endblock %}
+   {% block content %}{% endblock %}
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="{% static "jquery-2.0.3.min.js" %}"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="{% static "bootstrap-3.0.0/js/bootstrap.min.js" %}"></script>
+ </body>
+</html>
