@@ -151,7 +151,7 @@ class User(DirectoryResult):
 		self.set_external_mails(self.external_mails + [{"verified": False, "mail": external_mail}])
 
 	def del_external_mail(self, external_mail):
-		self.set_external_mails([m for m in self.external_mails if m['mail'] == external_mail])
+		self.set_external_mails([m for m in self.external_mails if m['mail'] != external_mail])
 
 	def get_group_dns(self):
 		conn = self.directory.generate_connection()
