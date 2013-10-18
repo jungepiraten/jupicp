@@ -192,6 +192,15 @@ class Group(DirectoryResult):
 		self.owners = attrs["owner"] if "owner" in attrs else []
 		self.managers = attrs["manager"] if "manager" in attrs else []
 
+	def set_owners(self, owners):
+		conn = self.directory.generate_connection()
+		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
+			'owners': self.owners
+			},{
+			'owners': owners
+			}))
+		self.owners = owners
+
 	def is_member(self, user):
 		return user.dn in self.members
 
@@ -209,6 +218,9 @@ class Group(DirectoryResult):
 
 	def add_member(self, user):
 		self.set_members(self.members + [ user.dn ])
+		# If this user was invited indivually, this is not longer needed now
+		if user.dn in self.owners:
+			self.set_owners([owner for owner in self.owners if owner != user.dn])
 	
 	def del_member(self, user):
 		self.set_members([member for member in self.members if member != user.dn])
