@@ -20,6 +20,14 @@ class Directory:
 	def get_user(self, uid):
 		return self.get_user_by_dn(self.get_user_dn(uid))
 
+	def get_user_by_mail(self, mail):
+		conn = self.generate_connection()
+		res = conn.search_s(self.user_dn_base, ldap.SCOPE_ONELEVEL, "(|(mail={0})(email={0})(otherMailbox={0}))".format(mail))
+		if len(res) != 1:
+			raise AttributeError("No such object".format(mail))
+		dn, user = res
+		return self.get_user_by_dn(dn)
+
 	def get_user_by_dn(self, dn):
 		return User(self, dn)
 	

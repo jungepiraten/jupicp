@@ -40,6 +40,16 @@ class RegisterForm(recaptcha_form.forms.RecaptchaForm):
 			pass
 		return user_name
 
+	def clean_mail(self):
+		# Check if mail is already in use
+		mail = self.cleaned_data['mail']
+		try:
+			settings.DIRECTORY.get_user_by_mail(mail)
+			raise forms.ValidationError(_("Mail already used"))
+		except AttributeError as e:
+			pass
+		return mail
+
 class PasswordForm(forms.Form):
 	user = forms.CharField(required=False)
 	mail = forms.EmailField(required=False)

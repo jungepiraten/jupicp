@@ -107,6 +107,14 @@ class MailAddView(RedirectView):
 			mail = self.request.POST['mail']
 		if not mail:
 			return reverse_lazy("dashboard")
+		
+		# Check if mailadress is already in use
+		try:
+			settings.DIRECTORY.get_user_by_mail(mail)
+			return reverse_lazy("dashboard")
+		except:
+			pass
+		
 		self.request.user.add_external_mail(mail)
 		return reverse_lazy("mails_verify_send", str(mail))
 
