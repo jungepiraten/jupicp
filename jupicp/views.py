@@ -104,7 +104,7 @@ class MailAddView(RedirectView):
 
 	def get_redirect_url(self, mail=None):
 		if mail == None:
-			mail = self.request.POST['mail']
+			mail = str(self.request.POST['mail'])
 		if not mail:
 			return reverse_lazy("dashboard")
 		
@@ -116,7 +116,7 @@ class MailAddView(RedirectView):
 			pass
 		
 		self.request.user.add_external_mail(mail)
-		return reverse_lazy("mails_verify_send", str(mail))
+		return reverse_lazy("mails_verify_send", kwargs={'mail': mail})
 
 class MailDelView(RedirectView):
 	permanent = False
