@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 00:18+0000\n"
+"POT-Creation-Date: 2013-10-18 02:50+0000\n"
 "PO-Revision-Date: 2013-10-17 23:58+0000\n"
 "Last-Translator: Patrick Rauscher <prauscher@prauscher.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Wrong Username or Password"
 msgstr "Falscher Nutzer*innenname oder Passwort"
 
-#: auth/templates/auth/login.html:11 jupicp/templates/jupicp/base.html:27
+#: auth/templates/auth/login.html:11 jupicp/templates/jupicp/base.html:28
 #: jupicp/templates/jupicp/password_done.html:9
 #: jupicp/templates/jupicp/register_done.html:9
 msgid "Login"
@@ -32,7 +32,7 @@ msgstr "Login"
 msgid "Lost password"
 msgstr "Passwort vergessen"
 
-#: auth/templates/auth/login.html:13 jupicp/templates/jupicp/base.html:26
+#: auth/templates/auth/login.html:13 jupicp/templates/jupicp/base.html:27
 msgid "Sign up"
 msgstr "Registrieren"
 
@@ -143,22 +143,26 @@ msgid "Description"
 msgstr "Beschreibung"
 
 #: jupicp/templates/jupicp/base.html:16
+msgid "Dashboard"
+msgstr "Startseite"
+
+#: jupicp/templates/jupicp/base.html:17
 msgid "Profile"
 msgstr "Profil"
 
-#: jupicp/templates/jupicp/base.html:17 jupicp/templates/jupicp/groups.html:5
+#: jupicp/templates/jupicp/base.html:18 jupicp/templates/jupicp/groups.html:5
 msgid "Groups"
 msgstr "Gruppen"
 
-#: jupicp/templates/jupicp/base.html:18
+#: jupicp/templates/jupicp/base.html:19
 msgid "Mailinglists"
 msgstr "Mailinglisten"
 
-#: jupicp/templates/jupicp/base.html:19
+#: jupicp/templates/jupicp/base.html:20
 msgid "Membership"
 msgstr "Mitgliedschaft"
 
-#: jupicp/templates/jupicp/base.html:24
+#: jupicp/templates/jupicp/base.html:25
 msgid "Logout"
 msgstr "Logout"
 
