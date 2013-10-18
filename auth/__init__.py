@@ -31,12 +31,12 @@ class Directory:
 	def get_user_by_dn(self, dn):
 		return User(self, dn)
 	
-	def create_user(self, uid, password, mail, externalMail):
+	def create_user(self, uid, password, externalMail):
 		conn = self.generate_connection()
 		conn.add_s(self.get_user_dn(uid), ldap.modlist.addModlist({
 			'objectClass': ["inetOrgPerson", "extensibleObject"],
 			'cn': uid,
-			'mail': mail,
+			'email': externalMail,
 			'userPassword': password,
 			'sn': uid,
 			}))
@@ -90,7 +90,7 @@ class User(DirectoryResult):
 	def fill_attrs(self, attrs):
 		self.name = attrs["uid"][0]
 		self.display_name = attrs["cn"][0] if "cn" in attrs else attrs["uid"][0]
-		self.mail = attrs["mail"][0]
+		self.mail = attrs["mail"][0] if "mail" in attrs else None
 		self.external_mails = []
 		if "otherMailbox" in attrs:
 			self.external_mails = self.external_mails + [{"verified":False, "mail":mail} for mail in attrs["otherMailbox"]]
@@ -110,7 +110,11 @@ class User(DirectoryResult):
 	def get_mails(self, only_verified = False):
 		if only_verified:
 			return [m for m in self.get_mails() if m["verified"]]
-		return self.external_mails + [{"verified":True, "mail":self.mail}]
+		
+		if self.mail:
+			return self.external_mails + [{"verified":True, "mail":self.mail}]
+		else:
+			return self.external_mails
 
 	def set_password(self, password):
 		conn = self.directory.generate_connection()

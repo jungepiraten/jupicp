@@ -17,7 +17,7 @@ class RegisterView(FormView):
 	def form_valid(self, form):
 		username = str(form.cleaned_data["user"])
 		password = utils.generate_password()
-		settings.DIRECTORY.create_user(username, password, username + "@community.junge-piraten.de", str(form.cleaned_data["mail"]))
+		settings.DIRECTORY.create_user(username, password, str(form.cleaned_data["mail"]))
 
 		utils.send_mail(settings.JUPICP_REGISTERMAIL, {'username': username, 'password': password}, str(form.cleaned_data["mail"]))
 		return super(RegisterView, self).form_valid(form)
