@@ -2,11 +2,9 @@
 {% load i18n %}
 
 {% block content %}
-<h1>Hallo {{user.name}}</h1>
-
-  {% if user.member_id %}
-   <p>Deine Junge-Piraten-Mitgliedsnummer: {{user.member_id}}</p>
-  {% endif %}
+<div class="page-header">
+ <h1>{% blocktrans with username=user.name %}Hello {{username}},{% endblocktrans %} <small>{% trans "have a great day" %}</small></h1>
+</div>
 
 <div class="row">
  <div class="col-md-6">

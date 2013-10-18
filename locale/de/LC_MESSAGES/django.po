@@ -1,18 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# German Language files for JuPiCP
+# Copyright (C) 2013
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Patrick Rauscher <prauscher@prauscher.de>
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 02:50+0000\n"
+"POT-Creation-Date: 2013-10-18 15:22+0000\n"
 "PO-Revision-Date: 2013-10-17 23:58+0000\n"
 "Last-Translator: Patrick Rauscher <prauscher@prauscher.de>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -166,11 +166,20 @@ msgstr "Mitgliedschaft"
 msgid "Logout"
 msgstr "Logout"
 
-#: jupicp/templates/jupicp/dashboard.html:14
+#: jupicp/templates/jupicp/dashboard.html:6
+#, python-format
+msgid "Hello %(username)s,"
+msgstr "Hallo %(username)s,"
+
+#: jupicp/templates/jupicp/dashboard.html:6
+msgid "have a great day"
+msgstr "guten Tag"
+
+#: jupicp/templates/jupicp/dashboard.html:12
 msgid "Your mailadresses"
 msgstr "Deine Mailadressen"
 
-#: jupicp/templates/jupicp/dashboard.html:17
+#: jupicp/templates/jupicp/dashboard.html:15
 #, python-format
 msgid ""
 "Your Mailadress in our system is <strong>%(mail)s</strong>. If you want to "
@@ -180,31 +189,31 @@ msgstr ""
 "Deine Mailadresse in unserem system ist <strong>%(mail)s</strong>. Wenn du "
 "sie ändern willst, schreib <a href=\"mailto:bofh@junge-piraten.de\">uns</a>"
 
-#: jupicp/templates/jupicp/dashboard.html:22
+#: jupicp/templates/jupicp/dashboard.html:20
 msgid "remove mailaddress"
 msgstr "Mailadresse entfernen"
 
-#: jupicp/templates/jupicp/dashboard.html:25
+#: jupicp/templates/jupicp/dashboard.html:23
 msgid "verified mailaddress"
 msgstr "Verifizierte Mailadresse"
 
-#: jupicp/templates/jupicp/dashboard.html:27
+#: jupicp/templates/jupicp/dashboard.html:25
 msgid "resend confirmationlink"
 msgstr "Bestätigungslink erneut zuschicken"
 
-#: jupicp/templates/jupicp/dashboard.html:37
+#: jupicp/templates/jupicp/dashboard.html:35
 msgid "add mailaddress"
 msgstr "Mailadresse hinzufügen"
 
-#: jupicp/templates/jupicp/dashboard.html:39
+#: jupicp/templates/jupicp/dashboard.html:37
 msgid "mailaddress"
 msgstr "Mailadresse"
 
-#: jupicp/templates/jupicp/dashboard.html:50
+#: jupicp/templates/jupicp/dashboard.html:48
 msgid "Your groupmemberships"
 msgstr "Deine Gruppenmitgliedschaft"
 
-#: jupicp/templates/jupicp/dashboard.html:55
+#: jupicp/templates/jupicp/dashboard.html:53
 msgid "leave group"
 msgstr "Gruppe verlassen"
 
