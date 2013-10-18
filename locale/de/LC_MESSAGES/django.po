@@ -1,0 +1,327 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-18 00:18+0000\n"
+"PO-Revision-Date: 2013-10-17 23:58+0000\n"
+"Last-Translator: Patrick Rauscher <prauscher@prauscher.de>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: auth/forms.py:13
+msgid "Wrong Username or Password"
+msgstr "Falscher Nutzer*innenname oder Passwort"
+
+#: auth/templates/auth/login.html:11 jupicp/templates/jupicp/base.html:27
+#: jupicp/templates/jupicp/password_done.html:9
+#: jupicp/templates/jupicp/register_done.html:9
+msgid "Login"
+msgstr "Login"
+
+#: auth/templates/auth/login.html:12
+msgid "Lost password"
+msgstr "Passwort vergessen"
+
+#: auth/templates/auth/login.html:13 jupicp/templates/jupicp/base.html:26
+msgid "Sign up"
+msgstr "Registrieren"
+
+#: django-recaptcha-form/recaptcha_form/forms.py:18
+msgid "Unknown error."
+msgstr "Unbekannter Fehler"
+
+#: django-recaptcha-form/recaptcha_form/forms.py:19
+msgid "We weren't able to verify the public key. Please try again later."
+msgstr ""
+"Konnte den öffentlichen Schlüssel nicht verifizieren. Bitte versuche es "
+"später erneut."
+
+#: django-recaptcha-form/recaptcha_form/forms.py:20
+msgid "We weren't able to verify the private key. Please try again later."
+msgstr ""
+"Konnte den privaten Schlüssel nicht verifizieren. Bitte versuche es später "
+"erneut."
+
+#: django-recaptcha-form/recaptcha_form/forms.py:21
+msgid "The challenge parameter of the verify script was incorrect."
+msgstr ""
+
+#: django-recaptcha-form/recaptcha_form/forms.py:22
+msgid "The CAPTCHA solution was incorrect."
+msgstr "Falsche CAPTCHA-Lösung"
+
+#: django-recaptcha-form/recaptcha_form/forms.py:23
+msgid ""
+"The parameters to /verify were incorrect, make sure you are passing all the "
+"required parameters.  Please try again later."
+msgstr ""
+
+#: django-recaptcha-form/recaptcha_form/forms.py:24
+msgid ""
+"reCAPTCHA API keys are tied to a specific domain name for security reasons.  "
+"Please try again later."
+msgstr ""
+
+#: django-recaptcha-form/recaptcha_form/forms.py:25
+msgid "Unable to contact the reCAPTCHA verify server.  Please try again later."
+msgstr ""
+"Kann den reCAPTCHA-server nicht erreichen. Bitte versuche es später erneut."
+
+#: django-recaptcha-form/recaptcha_form/forms.py:60
+msgid "An error occured with the CAPTCHA service. Please try again."
+msgstr ""
+"Mit dem CAPTCHA-Dienst ist ein Fehler aufgetreten. Bitte versuche es erneut."
+
+#: django-recaptcha-form/recaptcha_form/forms.py:62
+msgid "Please enter the CAPTCHA solution."
+msgstr "Bitte löse das CAPTCHA."
+
+#: django-recaptcha-form/recaptcha_form/forms.py:101
+#: django-recaptcha-form/recaptcha_form/forms.py:110
+msgid "Are you human?"
+msgstr "Bist du ein Mensch?"
+
+#: jupicp/forms.py:9
+msgid "Current password"
+msgstr "Momentanes Passwort"
+
+#: jupicp/forms.py:10
+msgid "Display name"
+msgstr "Anzeigename"
+
+#: jupicp/forms.py:11
+msgid "New password"
+msgstr "Neues Passwort"
+
+#: jupicp/forms.py:12
+msgid "Confirm new password"
+msgstr "Neues Passwort bestätigen"
+
+#: jupicp/forms.py:21
+msgid "Wrong Password"
+msgstr "Passwort fehlerhaft"
+
+#: jupicp/forms.py:26
+msgid "Passwords do not match"
+msgstr "Die Passwörter stimmen nicht überein"
+
+#: jupicp/forms.py:30
+msgid ""
+"three to 25 characters. may only consist of letters, digits, hypens and dots"
+msgstr ""
+"drei bis 25 Zeichen. Darf nur aus Buchstaben, Ziffern, Bindestrichen und "
+"Punkten bestehen"
+
+#: jupicp/forms.py:38
+msgid "User already exists"
+msgstr "Nutzer*innenname existiert bereits"
+
+#: jupicp/forms.py:48
+msgid "Mail already used"
+msgstr "Diese Mailadresse wird bereits verwendet"
+
+#: jupicp/forms.py:67
+msgid "User not found"
+msgstr "Nutzer*innenname nicht gefunden"
+
+#: jupicp/forms.py:72
+msgid "Name"
+msgstr "Name"
+
+#: jupicp/forms.py:73 jupicp/templates/jupicp/lists.html:12
+msgid "Description"
+msgstr "Beschreibung"
+
+#: jupicp/templates/jupicp/base.html:16
+msgid "Profile"
+msgstr "Profil"
+
+#: jupicp/templates/jupicp/base.html:17 jupicp/templates/jupicp/groups.html:5
+msgid "Groups"
+msgstr "Gruppen"
+
+#: jupicp/templates/jupicp/base.html:18
+msgid "Mailinglists"
+msgstr "Mailinglisten"
+
+#: jupicp/templates/jupicp/base.html:19
+msgid "Membership"
+msgstr "Mitgliedschaft"
+
+#: jupicp/templates/jupicp/base.html:24
+msgid "Logout"
+msgstr "Logout"
+
+#: jupicp/templates/jupicp/dashboard.html:14
+msgid "Your mailadresses"
+msgstr "Deine Mailadressen"
+
+#: jupicp/templates/jupicp/dashboard.html:17
+#, python-format
+msgid ""
+"Your Mailadress in our system is <strong>%(mail)s</strong>. If you want to "
+"change it, feel free to contact <a href=\"mailto:bofh@junge-piraten.de\">us</"
+"a>"
+msgstr ""
+"Deine Mailadresse in unserem system ist <strong>%(mail)s</strong>. Wenn du "
+"sie ändern willst, schreib <a href=\"mailto:bofh@junge-piraten.de\">uns</a>"
+
+#: jupicp/templates/jupicp/dashboard.html:22
+msgid "remove mailaddress"
+msgstr "Mailadresse entfernen"
+
+#: jupicp/templates/jupicp/dashboard.html:25
+msgid "verified mailaddress"
+msgstr "Verifizierte Mailadresse"
+
+#: jupicp/templates/jupicp/dashboard.html:27
+msgid "resend confirmationlink"
+msgstr "Bestätigungslink erneut zuschicken"
+
+#: jupicp/templates/jupicp/dashboard.html:37
+msgid "add mailaddress"
+msgstr "Mailadresse hinzufügen"
+
+#: jupicp/templates/jupicp/dashboard.html:39
+msgid "mailaddress"
+msgstr "Mailadresse"
+
+#: jupicp/templates/jupicp/dashboard.html:50
+msgid "Your groupmemberships"
+msgstr "Deine Gruppenmitgliedschaft"
+
+#: jupicp/templates/jupicp/dashboard.html:55
+msgid "leave group"
+msgstr "Gruppe verlassen"
+
+#: jupicp/templates/jupicp/groups.html:7
+msgid ""
+"Groups define your access-rights in many services. You may join some of the "
+"groups by yourself, others might require an invitation."
+msgstr ""
+"Gruppen bestimmen deine Zugriffsrechte bei vielen Diensten. Manchen darfst "
+"du selbst beitreten, andere benötigen eine Einladung."
+
+#: jupicp/templates/jupicp/groups.html:9
+#: jupicp/templates/jupicp/groups_create.html:12
+msgid "Create"
+msgstr "Anlegen"
+
+#: jupicp/templates/jupicp/groups_create.html:6
+msgid "Create group"
+msgstr "Gruppe anlegen"
+
+#: jupicp/templates/jupicp/groups_detail.html:12
+msgid "Join"
+msgstr "Beitreten"
+
+#: jupicp/templates/jupicp/groups_detail.html:14
+msgid "Leave"
+msgstr "Verlassen"
+
+#: jupicp/templates/jupicp/groups_detail.html:22
+msgid "Members"
+msgstr "Mitglieder"
+
+#: jupicp/templates/jupicp/groups_detail.html:27
+msgid "remove member"
+msgstr "Mitglied entfernen"
+
+#: jupicp/templates/jupicp/groups_detail.html:36
+msgid "add user"
+msgstr "Nutzer*in hinzufügen"
+
+#: jupicp/templates/jupicp/groups_detail.html:38
+msgid "username"
+msgstr "Nutzer*innenname"
+
+#: jupicp/templates/jupicp/lists.html:5
+msgid ""
+"Here you find a list of our (public) mailinglists. Note that you can read "
+"them on our <a href=\\"
+msgstr "Hier findest du unsere (öffentlichen) mailinglisten. "
+
+#: jupicp/templates/jupicp/lists.html:11
+msgid "List"
+msgstr "Liste"
+
+#: jupicp/templates/jupicp/lists.html:13
+msgid "Subscription"
+msgstr "Abbonniert"
+
+#: jupicp/templates/jupicp/lists.html:25
+#: jupicp/templates/jupicp/profile.html:15
+msgid "Save"
+msgstr "Speichern"
+
+#: jupicp/templates/jupicp/mails_verify.html:7
+msgid "Congratulations"
+msgstr "Glückwunsch"
+
+#: jupicp/templates/jupicp/mails_verify.html:8
+msgid "You verified your mailadress to use it."
+msgstr "Du hast deine Mailadresse bestätigt und kannst sie jetzt verwenden."
+
+#: jupicp/templates/jupicp/mails_verify.html:9
+#: jupicp/templates/jupicp/password.html:12
+msgid "Continue"
+msgstr "Fortfahren"
+
+#: jupicp/templates/jupicp/membership_empty.html:5
+msgid "Connect membership"
+msgstr "Mitgliedschaft verbinden"
+
+#: jupicp/templates/jupicp/membership_empty.html:6
+msgid "Become member"
+msgstr "Mitglied werden"
+
+#: jupicp/templates/jupicp/password.html:6
+msgid ""
+"Lost your password? Or even forgot the Loginname you were using here? No "
+"problem! Enter your Username (if known) or a mailadress to receive new "
+"credentials."
+msgstr ""
+"Hast du dein Passwort vergessen? Oder den Nutzer*innenname, den du hier "
+"benutzt hast? Kein Problem! Gib einfach deinen Nutzer*innenname (falls "
+"bekannt) oder eine Mailadresse an, um neue Zugangsdaten zu erhalten."
+
+#: jupicp/templates/jupicp/password_done.html:7
+msgid "Done!"
+msgstr "Erledigt!"
+
+#: jupicp/templates/jupicp/password_done.html:8
+msgid ""
+"We sent you an email containing your new password. Do not forget to change "
+"it."
+msgstr ""
+"Dein neues Passwort wird dir per Mail zugestellt. Vergiss nicht es zu ändern."
+
+#: jupicp/templates/jupicp/profile.html:8
+msgid "Settings changed successful"
+msgstr "Änderungen erfolgreich gespeichert"
+
+#: jupicp/templates/jupicp/register.html:11
+msgid "Register"
+msgstr "Registrieren"
+
+#: jupicp/templates/jupicp/register_done.html:7
+msgid "Ready!"
+msgstr "Bereit!"
+
+#: jupicp/templates/jupicp/register_done.html:8
+msgid ""
+"We registered your account succesfully. Check your mails to gather your "
+"initial password"
+msgstr ""
+"Dein Account wurde erfolgreich angelegt. Schaue in deine Mailbox um dein "
+"Passwort zu erhalten"
