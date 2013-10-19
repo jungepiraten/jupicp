@@ -211,7 +211,7 @@ msgstr "Mailadresse"
 
 #: jupicp/templates/jupicp/dashboard.html:48
 msgid "Your groupmemberships"
-msgstr "Deine Gruppenmitgliedschaft"
+msgstr "Deine Gruppenmitgliedschaften"
 
 #: jupicp/templates/jupicp/dashboard.html:53
 msgid "leave group"
