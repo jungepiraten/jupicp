@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:22+0000\n"
+"POT-Creation-Date: 2013-10-19 04:39+0200\n"
 "PO-Revision-Date: 2013-10-17 23:58+0000\n"
 "Last-Translator: Patrick Rauscher <prauscher@prauscher.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -259,10 +259,14 @@ msgid "username"
 msgstr "Nutzer*innenname"
 
 #: jupicp/templates/jupicp/lists.html:5
+#, fuzzy
 msgid ""
 "Here you find a list of our (public) mailinglists. Note that you can read "
-"them on our <a href=\\"
-msgstr "Hier findest du unsere (öffentlichen) mailinglisten. "
+"them on our <a href=\"//forum.junge-piraten.de\">Webforum</a> too. They are "
+"also available as shared Folders."
+msgstr ""
+"Hier findest du unsere (öffentlichen) mailinglisten. Du kannst sie auch in "
+"unserem <a href=\"//forum.junge-piraten.de\">Webforum</a> lesen."
 
 #: jupicp/templates/jupicp/lists.html:11
 msgid "List"

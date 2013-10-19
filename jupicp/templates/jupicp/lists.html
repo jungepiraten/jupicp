@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<p class="lead">{% trans "Here you find a list of our (public) mailinglists. Note that you can read them on our <a href=\"//forum.junge-piraten.de\">Webforum</a> too. They are also available as shared Folders." %}</p>
+<p class="lead">{% blocktrans %}Here you find a list of our (public) mailinglists. Note that you can read them on our <a href="//forum.junge-piraten.de">Webforum</a> too. They are also available as shared Folders.{% endblocktrans %}</p>
 <form action="{% url "lists" %}" method="post">
  {% csrf_token %}
  <table class="table table-condensed table-striped">
