@@ -8,8 +8,11 @@ class LoginForm(forms.Form):
 
 	def clean(self):
 		cleaned_data = super(LoginForm, self).clean()
-		ldap_user = settings.DIRECTORY.get_user(cleaned_data["user"])
-		if not ldap_user.check_password(cleaned_data["password"]):
+		try:
+			ldap_user = settings.DIRECTORY.get_user(cleaned_data["user"])
+			if not ldap_user.check_password(cleaned_data["password"]):
+				raise AttributeError("wrong password")
+		except AttributeError:
 			raise forms.ValidationError(_("Wrong Username or Password"))
 		cleaned_data['ldap_user'] = ldap_user
 		return cleaned_data
