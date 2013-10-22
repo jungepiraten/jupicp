@@ -55,7 +55,7 @@ class Directory:
 	def get_group_by_dn(self, dn):
 		return Group(self, dn)
 	
-	def create_group(self, display_name, mail, members, managers = [], owners = []):
+	def create_group(self, display_name, members, managers = [], owners = []):
 		group = display_name.lower().replace("/","-").replace(" ","_")
 	
 		conn = self.generate_connection()
@@ -63,10 +63,9 @@ class Directory:
 			'objectClass': ["groupOfUniqueNames", "extensibleObject"],
 			'cn': group,
 			'displayName': display_name,
-			'mail': mail,
-			'owner': owners,
-			'manager': managers if managers != [] else members,
-			'uniqueMember': members
+			'owner': [ owner.dn for owner in owners ],
+			'manager': [ manager.dn for manager in managers ] if managers != [] else [ member.dn for member in members ],
+			'uniqueMember': [ member.dn for member in members ]
 			}))
 		return self.get_group(group)
 
