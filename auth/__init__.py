@@ -159,7 +159,7 @@ class User(DirectoryResult):
 
 	def get_group_dns(self):
 		conn = self.directory.generate_connection()
-		return [dn for dn, attrs in conn.search_s(self.directory.group_dn_base, ldap.SCOPE_ONELEVEL, "member={0}".format(self.dn), ["cn"])]
+		return [dn for dn, attrs in conn.search_s(self.directory.group_dn_base, ldap.SCOPE_ONELEVEL, "uniqueMember={0}".format(self.dn), ["cn"])]
 
 	def get_groups(self):
 		return [self.directory.get_group_by_dn(group_dn) for group_dn in self.get_group_dns()]
