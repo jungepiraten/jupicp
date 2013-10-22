@@ -210,9 +210,9 @@ class Group(DirectoryResult):
 	def set_members(self, members):
 		conn = self.directory.generate_connection()
 		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
-			'member': self.members
+			'uniqueMember': self.members
 			},{
-			'member': members
+			'uniqueMember': members
 			}))
 		self.members = members
 
