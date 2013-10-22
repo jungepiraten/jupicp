@@ -170,7 +170,8 @@ class GroupsListView(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(GroupsListView, self).get_context_data(**kwargs)
 		context['groups'] = settings.DIRECTORY.get_groups()
-		context['may_create'] = self.request.user.match_dn(settings.ADMIN_DN)
+		if self.request.user:
+			context['may_create'] = self.request.user.match_dn(settings.ADMIN_DN)
 		return context
 
 class GroupsCreateView(FormView):
