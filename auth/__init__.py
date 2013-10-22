@@ -60,13 +60,13 @@ class Directory:
 	
 		conn = self.generate_connection()
 		conn.add_s(self.get_group_dn(group), ldap.modlist.addModlist({
-			'objectClass': ["groupOfNames", "extensibleObject"],
+			'objectClass': ["groupOfUniqueNames", "extensibleObject"],
 			'cn': group,
 			'displayName': display_name,
 			'mail': mail,
 			'owner': owners,
 			'manager': managers if managers != [] else members,
-			'member': members
+			'uniqueMember': members
 			}))
 		return self.get_group(group)
 
@@ -188,7 +188,7 @@ class Group(DirectoryResult):
 		self.mail = attrs["mail"][0] if "mail" in attrs else None
 		self.display_name = attrs["displayName"][0] if "displayName" in attrs else attrs["cn"][0]
 		self.description = attrs["description"][0] if "description" in attrs else ''
-		self.members = attrs["member"]
+		self.members = attrs["uniqueMember"]
 		self.owners = attrs["owner"] if "owner" in attrs else []
 		self.managers = attrs["manager"] if "manager" in attrs else []
 
