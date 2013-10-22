@@ -178,8 +178,8 @@ class GroupsCreateView(FormView):
 	form_class = forms.GroupsCreateForm
 	
 	def form_valid(self, form):
-		name = settings.DIRECTORY.create_group( str(form.cleaned_data["display_name"]), [ self.request.user ])
-		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": name}))
+		group = settings.DIRECTORY.create_group( str(form.cleaned_data["display_name"]), [ self.request.user ])
+		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": group.name}))
 
 class GroupsDetailView(TemplateView):
 	template_name = "jupicp/groups_detail.html"
