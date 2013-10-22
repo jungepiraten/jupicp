@@ -178,7 +178,7 @@ class GroupsCreateView(FormView):
 	form_class = forms.GroupsCreateForm
 	
 	def form_valid(self, form):
-		name = settings.DIRECTORY.create_group(form.cleaned_values["display_name"], [ self.request.user ])
+		name = settings.DIRECTORY.create_group(form.cleaned_data["display_name"], [ self.request.user ])
 		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": name}))
 
 class GroupsDetailView(TemplateView):
