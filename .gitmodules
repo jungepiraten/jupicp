@@ -1,6 +1,3 @@
 [submodule "django-recaptcha-form"]
 	path = django-recaptcha-form
 	url = https://github.com/ntucker/django-recaptcha-form
-[submodule "django-bootstrap-form"]
-	path = django-bootstrap-form
-	url = https://github.com/tzangms/django-bootstrap-form.git
