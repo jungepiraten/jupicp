@@ -193,6 +193,11 @@ class GroupsDetailView(TemplateView):
 			context['may_edit'] = context['group'].may_edit(self.request.user)
 		return context
 
+class GroupsDetailJSONView(utils.JSONView):
+	def get_context_data(self, **kwargs):
+		group = settings.DIRECTORY.get_group(kwargs["group_name"])
+		return {"id": group.name, "name": group.display_name, "description": group.description, "members": [user.name for user in group.get_members()]}
+
 class GroupsMemberAddView(RedirectView):
 	permanent = False
 
