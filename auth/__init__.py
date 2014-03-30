@@ -158,7 +158,7 @@ class User(DirectoryResult):
 
 	def get_group_dns(self):
 		conn = self.directory.generate_connection()
-		return [dn for dn, attrs in conn.search_s(self.directory.group_dn_base, ldap.SCOPE_ONELEVEL, "uniqueMember={0}".format(self.dn), ["cn"])]
+		return [dn.lower() for dn, attrs in conn.search_s(self.directory.group_dn_base, ldap.SCOPE_ONELEVEL, "uniqueMember={0}".format(self.dn), ["cn"])]
 
 	def get_groups(self):
 		return [self.directory.get_group_by_dn(group_dn) for group_dn in self.get_group_dns()]
@@ -167,9 +167,9 @@ class User(DirectoryResult):
 	Check if we are specified by some dn. This may either be the case it is our dn or if the dn specifies a group we are part of
 	"""
 	def match_dn(self, dn):
-		if dn == self.dn:
+		if dn.lower() == self.dn.lower():
 			return True
-		if dn in self.get_group_dns():
+		if dn.lower() in self.get_group_dns():
 			return True
 		return False
 
@@ -219,10 +219,10 @@ class Group(DirectoryResult):
 		self.set_members(self.members + [ user.dn ])
 		# If this user was invited indivually, this is not longer needed now
 		if user.dn in self.owners:
-			self.set_owners([owner for owner in self.owners if owner != user.dn])
+			self.set_owners([owner for owner in self.owners if owner.lower() != user.dn.lower()])
 	
 	def del_member(self, user):
-		self.set_members([member for member in self.members if member != user.dn])
+		self.set_members([member for member in self.members if member.lower() != user.dn.lower()])
 	
 	def may_edit(self, user):
 		for manager in self.managers:
