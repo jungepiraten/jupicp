@@ -70,7 +70,12 @@ class MailinglistsListView(TemplateView):
 	
 	def get_context_data(self, **kwargs):
 		context = super(MailinglistsListView, self).get_context_data(**kwargs)
-		context['lists'] = mailman.get_lists(only_public=True, lock=False)
+		lists = {}
+		for listname, mlist in mailman.get_lists(only_public=True, lock=False):
+			if mlist.host_name not in lists:
+				lists[mlist.host_name] = {}
+			lists[mlist.host_name][listname] = mlist
+		context['lists'] = lists
 		context['mails'] = self.request.user.get_mails(only_verified=True)
 		return context
 
