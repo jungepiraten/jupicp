@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-19 04:39+0200\n"
+"POT-Creation-Date: 2014-04-11 13:48+0200\n"
 "PO-Revision-Date: 2013-10-17 23:58+0000\n"
 "Last-Translator: Patrick Rauscher <prauscher@prauscher.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: auth/forms.py:13
+#: auth/forms.py:16
 msgid "Wrong Username or Password"
 msgstr "Falscher Nutzer*innenname oder Passwort"
 
@@ -36,58 +36,59 @@ msgstr "Passwort vergessen"
 msgid "Sign up"
 msgstr "Registrieren"
 
-#: django-recaptcha-form/recaptcha_form/forms.py:18
+#: django-recaptcha-form/recaptcha_form/forms.py:18 recaptcha_form/forms.py:18
 msgid "Unknown error."
 msgstr "Unbekannter Fehler"
 
-#: django-recaptcha-form/recaptcha_form/forms.py:19
+#: django-recaptcha-form/recaptcha_form/forms.py:19 recaptcha_form/forms.py:19
 msgid "We weren't able to verify the public key. Please try again later."
 msgstr ""
 "Konnte den öffentlichen Schlüssel nicht verifizieren. Bitte versuche es "
 "später erneut."
 
-#: django-recaptcha-form/recaptcha_form/forms.py:20
+#: django-recaptcha-form/recaptcha_form/forms.py:20 recaptcha_form/forms.py:20
 msgid "We weren't able to verify the private key. Please try again later."
 msgstr ""
 "Konnte den privaten Schlüssel nicht verifizieren. Bitte versuche es später "
 "erneut."
 
-#: django-recaptcha-form/recaptcha_form/forms.py:21
+#: django-recaptcha-form/recaptcha_form/forms.py:21 recaptcha_form/forms.py:21
 msgid "The challenge parameter of the verify script was incorrect."
 msgstr ""
 
-#: django-recaptcha-form/recaptcha_form/forms.py:22
+#: django-recaptcha-form/recaptcha_form/forms.py:22 recaptcha_form/forms.py:22
 msgid "The CAPTCHA solution was incorrect."
 msgstr "Falsche CAPTCHA-Lösung"
 
-#: django-recaptcha-form/recaptcha_form/forms.py:23
+#: django-recaptcha-form/recaptcha_form/forms.py:23 recaptcha_form/forms.py:23
 msgid ""
 "The parameters to /verify were incorrect, make sure you are passing all the "
 "required parameters.  Please try again later."
 msgstr ""
 
-#: django-recaptcha-form/recaptcha_form/forms.py:24
+#: django-recaptcha-form/recaptcha_form/forms.py:24 recaptcha_form/forms.py:24
 msgid ""
 "reCAPTCHA API keys are tied to a specific domain name for security reasons.  "
 "Please try again later."
 msgstr ""
 
-#: django-recaptcha-form/recaptcha_form/forms.py:25
+#: django-recaptcha-form/recaptcha_form/forms.py:25 recaptcha_form/forms.py:25
 msgid "Unable to contact the reCAPTCHA verify server.  Please try again later."
 msgstr ""
 "Kann den reCAPTCHA-server nicht erreichen. Bitte versuche es später erneut."
 
-#: django-recaptcha-form/recaptcha_form/forms.py:60
+#: django-recaptcha-form/recaptcha_form/forms.py:60 recaptcha_form/forms.py:60
 msgid "An error occured with the CAPTCHA service. Please try again."
 msgstr ""
 "Mit dem CAPTCHA-Dienst ist ein Fehler aufgetreten. Bitte versuche es erneut."
 
-#: django-recaptcha-form/recaptcha_form/forms.py:62
+#: django-recaptcha-form/recaptcha_form/forms.py:62 recaptcha_form/forms.py:62
 msgid "Please enter the CAPTCHA solution."
 msgstr "Bitte löse das CAPTCHA."
 
 #: django-recaptcha-form/recaptcha_form/forms.py:101
 #: django-recaptcha-form/recaptcha_form/forms.py:110
+#: recaptcha_form/forms.py:101 recaptcha_form/forms.py:110
 msgid "Are you human?"
 msgstr "Bist du ein Mensch?"
 
@@ -242,19 +243,23 @@ msgstr "Beitreten"
 msgid "Leave"
 msgstr "Verlassen"
 
-#: jupicp/templates/jupicp/groups_detail.html:22
+#: jupicp/templates/jupicp/groups_detail.html:17
+msgid "Remove"
+msgstr "Löschen"
+
+#: jupicp/templates/jupicp/groups_detail.html:23
 msgid "Members"
 msgstr "Mitglieder"
 
-#: jupicp/templates/jupicp/groups_detail.html:27
+#: jupicp/templates/jupicp/groups_detail.html:28
 msgid "remove member"
 msgstr "Mitglied entfernen"
 
-#: jupicp/templates/jupicp/groups_detail.html:36
+#: jupicp/templates/jupicp/groups_detail.html:37
 msgid "add user"
 msgstr "Nutzer*in hinzufügen"
 
-#: jupicp/templates/jupicp/groups_detail.html:38
+#: jupicp/templates/jupicp/groups_detail.html:39
 msgid "username"
 msgstr "Nutzer*innenname"
 

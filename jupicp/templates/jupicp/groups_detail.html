@@ -14,6 +14,7 @@
    <a href="{% url "groups_member_del" group.name user.name %}" class="btn btn-danger">{% trans "Leave" %}</a>
   {% endif %}
   {% if may_edit %}
+   <a href="{% url "groups_delete" group.name %}" class="btn btn-danger">{% trans "Remove" %}</a>
   {% endif %}
  </div>
 

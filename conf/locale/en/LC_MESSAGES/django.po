@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-20 18:51+0100\n"
+"POT-Creation-Date: 2014-04-11 13:48+0200\n"
 "PO-Revision-Date: 2014-03-20 18:52+0100\n"
 "Last-Translator: Patrick Rauscher <patrick.rauscher@junge-piraten.de>\n"
 "Language-Team: English <en@li.org>\n"
@@ -73,7 +73,8 @@ msgstr ""
 
 #: django-recaptcha-form/recaptcha_form/forms.py:25 recaptcha_form/forms.py:25
 msgid "Unable to contact the reCAPTCHA verify server.  Please try again later."
-msgstr "Unable to contact the reCAPTCHA verify server.  Please try again later."
+msgstr ""
+"Unable to contact the reCAPTCHA verify server.  Please try again later."
 
 #: django-recaptcha-form/recaptcha_form/forms.py:60 recaptcha_form/forms.py:60
 msgid "An error occured with the CAPTCHA service. Please try again."
@@ -240,19 +241,23 @@ msgstr "Join"
 msgid "Leave"
 msgstr "Leave"
 
-#: jupicp/templates/jupicp/groups_detail.html:22
+#: jupicp/templates/jupicp/groups_detail.html:17
+msgid "Remove"
+msgstr "Remove"
+
+#: jupicp/templates/jupicp/groups_detail.html:23
 msgid "Members"
 msgstr "Members"
 
-#: jupicp/templates/jupicp/groups_detail.html:27
+#: jupicp/templates/jupicp/groups_detail.html:28
 msgid "remove member"
 msgstr "remove member"
 
-#: jupicp/templates/jupicp/groups_detail.html:36
+#: jupicp/templates/jupicp/groups_detail.html:37
 msgid "add user"
 msgstr "add user"
 
-#: jupicp/templates/jupicp/groups_detail.html:38
+#: jupicp/templates/jupicp/groups_detail.html:39
 msgid "username"
 msgstr "username"
 

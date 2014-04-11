@@ -231,6 +231,10 @@ class Group(DirectoryResult):
 	
 	def del_member(self, user):
 		self.set_members([member for member in self.members if member.lower() != user.dn.lower()])
+
+	def delete(self):
+		conn = self.directory.generate_connection()
+		conn.delete_s(self.dn)
 	
 	def may_edit(self, user):
 		for manager in self.managers:

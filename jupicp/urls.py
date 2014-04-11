@@ -43,6 +43,7 @@ urlpatterns = patterns('',
     url(r'^groups/(?P<group_name>[^/]+)/members/add', require_login(jupicp.views.GroupsMemberAddView.as_view()), name="groups_member_add"),
     url(r'^groups/(?P<group_name>[^/]+)/members/(?P<user_name>[^/]+)/add', require_login(jupicp.views.GroupsMemberAddView.as_view()), name="groups_member_add"),
     url(r'^groups/(?P<group_name>[^/]+)/members/(?P<user_name>[^/]+)/del', require_login(jupicp.views.GroupsMemberDelView.as_view()), name="groups_member_del"),
+    url(r'^groups/(?P<group_name>[^/]+)/delete', jupicp.views.GroupsDeleteView.as_view(), name="groups_delete"),
     url(r'^groups/(?P<group_name>[^/]+)', jupicp.views.GroupsDetailView.as_view(), name="groups_detail"),
     url(r'^groups/', jupicp.views.GroupsListView.as_view(), name="groups"),
 

@@ -213,6 +213,22 @@ class GroupsDetailJSONView(utils.JSONView):
 		return {"id": group.name, "name": group.display_name, "description": group.description, "members": [user.name for user in group.get_members()]}
 
 @utils.raise_404
+class GroupsDeleteView(RedirectView):
+	permanent = False
+
+	def get_redirect_url(self, group_name):
+		try:
+			group = settings.DIRECTORY.get_group(group_name)
+		except:
+			raise ObjectDoesNotExist
+
+		if not group.may_edit(self.request.user):
+			raise PermissionDenied
+		group.delete()
+
+		return reverse_lazy("groups")
+
+@utils.raise_404
 class GroupsMemberAddView(RedirectView):
 	permanent = False
 
