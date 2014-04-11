@@ -187,6 +187,7 @@ class GroupsCreateView(FormView):
 		group = settings.DIRECTORY.create_group( str(form.cleaned_data["display_name"]), [ self.request.user ])
 		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": group.name}))
 
+@utils.raise_404
 class GroupsDetailView(TemplateView):
 	template_name = "jupicp/groups_detail.html"
 
@@ -202,6 +203,7 @@ class GroupsDetailView(TemplateView):
 			context['may_edit'] = context['group'].may_edit(self.request.user)
 		return context
 
+@utils.raise_404
 class GroupsDetailJSONView(utils.JSONView):
 	def get_context_data(self, **kwargs):
 		try:
@@ -210,17 +212,18 @@ class GroupsDetailJSONView(utils.JSONView):
 			raise ObjectDoesNotExist
 		return {"id": group.name, "name": group.display_name, "description": group.description, "members": [user.name for user in group.get_members()]}
 
+@utils.raise_404
 class GroupsMemberAddView(RedirectView):
 	permanent = False
 
 	def get_redirect_url(self, group_name, user_name=None):
 		try:
 			group = settings.DIRECTORY.get_group(group_name)
+			if not user_name:
+				user_name = self.request.POST["user"]
+			user = settings.DIRECTORY.get_user(user_name)
 		except:
 			raise ObjectDoesNotExist
-		if not user_name:
-			user_name = self.request.POST["user"]
-		user = settings.DIRECTORY.get_user(user_name)
 
 		if (not group.may_edit(self.request.user)) and (self.request.user == user and not group.may_join(self.request.user)):
 			raise PermissionDenied
@@ -228,12 +231,16 @@ class GroupsMemberAddView(RedirectView):
 		
 		return reverse_lazy("groups_detail", kwargs={'group_name':group_name})
 
+@utils.raise_404
 class GroupsMemberDelView(RedirectView):
 	permanent = False
 	
 	def get_redirect_url(self, group_name, user_name):
-		group = settings.DIRECTORY.get_group(group_name)
-		user = settings.DIRECTORY.get_user(user_name)
+		try:
+			group = settings.DIRECTORY.get_group(group_name)
+			user = settings.DIRECTORY.get_user(user_name)
+		except:
+			raise ObjectDoesNotExist
 
 		if (not group.may_edit(self.request.user)) and (self.request.user == user and not group.is_member(self.request.user)):
 			raise PermissionDenied

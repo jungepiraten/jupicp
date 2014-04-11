@@ -14,6 +14,20 @@ def send_mail(data, options, recipient):
 		recipient = [recipient]
 	django.core.mail.send_mail(data['subject'], data['body'].format(**options), data['from'], recipient)
 
+def raise_404(original_class):
+	original_dispatch = original_class.dispatch
+
+	def dispatch(self, *args, **kwargs):
+		from django.core.exceptions import ObjectDoesNotExist
+		from django.http import Http404
+		try:
+			return original_dispatch(self, *args, **kwargs)
+		except ObjectDoesNotExist, ex:
+			raise Http404(ex.message)
+
+	original_class.dispatch = dispatch
+	return original_class
+
 class JSONView(View):
 	def get(self, request, *args, **kwargs):
 		context = self.get_context_data(*args, **kwargs)
