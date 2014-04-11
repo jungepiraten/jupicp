@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, RedirectView
 from django.views.generic.edit import FormView
 from django.core import signing
 from django.core.urlresolvers import reverse_lazy
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 
 import mailman
 from jupicp import forms, utils
@@ -181,6 +182,8 @@ class GroupsCreateView(FormView):
 	form_class = forms.GroupsCreateForm
 	
 	def form_valid(self, form):
+		if not self.request.user or not self.request.user.match_dn(settings.ADMIN_DN):
+			raise PermissionDenied
 		group = settings.DIRECTORY.create_group( str(form.cleaned_data["display_name"]), [ self.request.user ])
 		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": group.name}))
 
@@ -189,7 +192,10 @@ class GroupsDetailView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(GroupsDetailView, self).get_context_data(**kwargs)
-		context['group'] = settings.DIRECTORY.get_group(kwargs["group_name"])
+		try:
+			context['group'] = settings.DIRECTORY.get_group(kwargs["group_name"])
+		except:
+			raise ObjectDoesNotExist
 		if self.request.user:
 			context['is_member'] = context['group'].is_member(self.request.user)
 			context['may_join'] = context['group'].may_join(self.request.user)
@@ -198,20 +204,26 @@ class GroupsDetailView(TemplateView):
 
 class GroupsDetailJSONView(utils.JSONView):
 	def get_context_data(self, **kwargs):
-		group = settings.DIRECTORY.get_group(kwargs["group_name"])
+		try:
+			group = settings.DIRECTORY.get_group(kwargs["group_name"])
+		except:
+			raise ObjectDoesNotExist
 		return {"id": group.name, "name": group.display_name, "description": group.description, "members": [user.name for user in group.get_members()]}
 
 class GroupsMemberAddView(RedirectView):
 	permanent = False
 
 	def get_redirect_url(self, group_name, user_name=None):
-		group = settings.DIRECTORY.get_group(group_name)
+		try:
+			group = settings.DIRECTORY.get_group(group_name)
+		except:
+			raise ObjectDoesNotExist
 		if not user_name:
 			user_name = self.request.POST["user"]
 		user = settings.DIRECTORY.get_user(user_name)
 
 		if (not group.may_edit(self.request.user)) and (self.request.user == user and not group.may_join(self.request.user)):
-			raise Exception("403")
+			raise PermissionDenied
 		group.add_member(user)
 		
 		return reverse_lazy("groups_detail", kwargs={'group_name':group_name})
@@ -224,7 +236,7 @@ class GroupsMemberDelView(RedirectView):
 		user = settings.DIRECTORY.get_user(user_name)
 
 		if (not group.may_edit(self.request.user)) and (self.request.user == user and not group.is_member(self.request.user)):
-			raise Exception("403")
+			raise PermissionDenied
 		group.del_member(user)
 
 		return reverse_lazy("groups_detail", kwargs={'group_name':group_name})
