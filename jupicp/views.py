@@ -157,7 +157,10 @@ class PasswordView(FormView):
 		password = utils.generate_password()
 		
 		user.set_password(password)
-		utils.send_mail(settings.JUPICP_PASSWORDMAIL, {'username': user.name, 'mail': user.mail, 'password': password}, [mail["mail"] for mail in user.external_mails] + [user.mail])
+		mails = [mail["mail"] for mail in user.external_mails]
+		if user.mail:
+			mails.append(user.mail)
+		utils.send_mail(settings.JUPICP_PASSWORDMAIL, {'username': user.name, 'mail': user.mail, 'password': password}, mails)
 		return super(PasswordView, self).form_valid(form)
 
 class PasswordDoneView(TemplateView):
