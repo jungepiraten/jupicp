@@ -184,7 +184,7 @@ class GroupsCreateView(FormView):
 	def form_valid(self, form):
 		if not self.request.user or not self.request.user.match_dn(settings.ADMIN_DN):
 			raise PermissionDenied
-		group = settings.DIRECTORY.create_group( str(form.cleaned_data["display_name"]), [ self.request.user ])
+		group = settings.DIRECTORY.create_group( str(form.cleaned_data["display_name"]), str(form.cleaned_data["description"]), [ self.request.user ])
 		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": group.name}))
 
 @utils.raise_404
