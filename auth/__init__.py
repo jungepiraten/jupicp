@@ -2,6 +2,9 @@
 
 import ldap, ldap.modlist
 
+# LDAP does not accept empty groups. Use this string to have non-empty groups. Must not be a valid user-dn
+EMPTY_LIST_IDENTIFIER="cn=empty"
+
 class Directory:
 	def __init__(self, ldap_host = '', bind_user = '', bind_password = '', user_dn_base = '', group_dn_base = ''):
 		def get_connection():
@@ -187,7 +190,9 @@ class Group(DirectoryResult):
 		self.mail = attrs["mail"][0] if "mail" in attrs else None
 		self.display_name = attrs["displayName"][0] if "displayName" in attrs else attrs["cn"][0]
 		self.description = attrs["description"][0] if "description" in attrs else ''
-		self.members = attrs["uniqueMember"]
+		# Keep track what's really in the list to generate valid LDIFs later
+		self._members = attrs["uniqueMember"]
+		self.members = [member for member in self._members if member != EMPTY_LIST_IDENTIFIER]
 		self.owners = attrs["owner"] if "owner" in attrs else []
 		self.managers = attrs["manager"] if "manager" in attrs else []
 
@@ -207,9 +212,12 @@ class Group(DirectoryResult):
 		return [self.directory.get_user_by_dn(member) for member in self.members]
 
 	def set_members(self, members):
+		if not members:
+			members = [EMPTY_LIST_IDENTIFIER]
+
 		conn = self.directory.generate_connection()
 		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
-			'uniqueMember': self.members
+			'uniqueMember': self._members
 			},{
 			'uniqueMember': members
 			}))
