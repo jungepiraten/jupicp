@@ -128,7 +128,7 @@ class User(DirectoryResult):
 		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
 			"cn": self.attrs["cn"] if "cn" in self.attrs else []
 		}, {
-			"cn": str(common_name)
+			"cn": unicode(common_name)
 		}))
 		self.attrs["cn"] = [common_name]
 		self.common_name = common_name
@@ -136,11 +136,11 @@ class User(DirectoryResult):
 	def set_external_mails(self, external_mails):
 		conn = self.directory.generate_connection()
 		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
-			"otherMailbox": [str(m['mail']) for m in self.external_mails if not m['verified']],
-			"emailAddress": [str(m['mail']) for m in self.external_mails if m['verified']]
+			"otherMailbox": [unicode(m['mail']) for m in self.external_mails if not m['verified']],
+			"emailAddress": [unicode(m['mail']) for m in self.external_mails if m['verified']]
 			},{
-			"otherMailbox": [str(m['mail']) for m in external_mails if not m['verified']],
-			"emailAddress": [str(m['mail']) for m in external_mails if m['verified']]
+			"otherMailbox": [unicode(m['mail']) for m in external_mails if not m['verified']],
+			"emailAddress": [unicode(m['mail']) for m in external_mails if m['verified']]
 			}))
 		self.external_mails = external_mails
 	

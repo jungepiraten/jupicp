@@ -15,11 +15,11 @@ class RegisterView(FormView):
 	success_url = reverse_lazy("register_done")
 	
 	def form_valid(self, form):
-		username = str(form.cleaned_data["user"])
+		username = unicode(form.cleaned_data["user"])
 		password = utils.generate_password()
-		settings.DIRECTORY.create_user(username, password, str(form.cleaned_data["mail"]))
+		settings.DIRECTORY.create_user(username, password, unicode(form.cleaned_data["mail"]))
 
-		utils.send_mail(settings.JUPICP_REGISTERMAIL, {'username': username, 'password': password}, str(form.cleaned_data["mail"]))
+		utils.send_mail(settings.JUPICP_REGISTERMAIL, {'username': username, 'password': password}, unicode(form.cleaned_data["mail"]))
 		return super(RegisterView, self).form_valid(form)
 
 class RegisterDoneView(TemplateView):
@@ -109,7 +109,7 @@ class MailAddView(RedirectView):
 
 	def get_redirect_url(self, mail=None):
 		if mail == None:
-			mail = str(self.request.POST['mail'])
+			mail = unicode(self.request.POST['mail'])
 		if not mail:
 			return reverse_lazy("dashboard")
 		
@@ -135,7 +135,7 @@ class MailVerifySendView(RedirectView):
 
 	def get_redirect_url(self, mail):
 		token = signing.dumps([mail, self.request.user.name])
-		token_link = self.request.build_absolute_uri(str(reverse_lazy("mails_verify", kwargs={"data_signed":token})))
+		token_link = self.request.build_absolute_uri(unicode(reverse_lazy("mails_verify", kwargs={"data_signed":token})))
 		
 		utils.send_mail(settings.JUPICP_VERIFYMAIL, {'username': self.request.user.name, 'mail': mail, 'token': token, 'token_link': token_link}, mail)
 		return reverse_lazy("dashboard")
@@ -189,7 +189,7 @@ class GroupsCreateView(FormView):
 	def form_valid(self, form):
 		if not self.request.user or not self.request.user.match_dn(settings.ADMIN_DN):
 			raise PermissionDenied
-		group = settings.DIRECTORY.create_group( str(form.cleaned_data["display_name"]), str(form.cleaned_data["description"]), [ self.request.user ])
+		group = settings.DIRECTORY.create_group( unicode(form.cleaned_data["display_name"]), unicode(form.cleaned_data["description"]), [ self.request.user ])
 		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": group.name}))
 
 @utils.raise_404
