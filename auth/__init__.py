@@ -18,16 +18,16 @@ class Directory:
 		self.group_dn_base = group_dn_base
 	
 	def get_user_dn(self, uid):
-		return "uid={name},{base_dn}".format(name=uid, base_dn=self.user_dn_base)
+		return u"uid={name},{base_dn}".format(name=uid, base_dn=self.user_dn_base)
 	
 	def get_user(self, uid):
 		return self.get_user_by_dn(self.get_user_dn(uid))
 
 	def get_user_by_mail(self, mail):
 		conn = self.generate_connection()
-		res = conn.search_s(self.user_dn_base, ldap.SCOPE_ONELEVEL, "(|(mail={0})(email={0})(otherMailbox={0}))".format(mail))
+		res = conn.search_s(self.user_dn_base, ldap.SCOPE_ONELEVEL, u"(|(mail={0})(email={0})(otherMailbox={0}))".format(mail))
 		if len(res) != 1:
-			raise AttributeError("No such object".format(mail))
+			raise AttributeError(u"No such object".format(mail))
 		dn, user = res
 		return self.get_user_by_dn(dn)
 
@@ -46,7 +46,7 @@ class Directory:
 		return self.get_user(uid)
 	
 	def get_group_dn(self, group):
-		return "cn={name},{base_dn}".format(name=unicode(group), base_dn=self.group_dn_base)
+		return u"cn={name},{base_dn}".format(name=group, base_dn=self.group_dn_base)
 	
 	def get_groups(self):
 		conn = self.generate_connection()
@@ -128,7 +128,7 @@ class User(DirectoryResult):
 		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
 			"cn": self.attrs["cn"] if "cn" in self.attrs else []
 		}, {
-			"cn": unicode(common_name)
+			"cn": common_name
 		}))
 		self.attrs["cn"] = [common_name]
 		self.common_name = common_name
@@ -136,11 +136,11 @@ class User(DirectoryResult):
 	def set_external_mails(self, external_mails):
 		conn = self.directory.generate_connection()
 		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
-			"otherMailbox": [unicode(m['mail']) for m in self.external_mails if not m['verified']],
-			"emailAddress": [unicode(m['mail']) for m in self.external_mails if m['verified']]
+			"otherMailbox": [m['mail'] for m in self.external_mails if not m['verified']],
+			"emailAddress": [m['mail'] for m in self.external_mails if m['verified']]
 			},{
-			"otherMailbox": [unicode(m['mail']) for m in external_mails if not m['verified']],
-			"emailAddress": [unicode(m['mail']) for m in external_mails if m['verified']]
+			"otherMailbox": [m['mail'] for m in external_mails if not m['verified']],
+			"emailAddress": [m['mail'] for m in external_mails if m['verified']]
 			}))
 		self.external_mails = external_mails
 	
@@ -162,7 +162,7 @@ class User(DirectoryResult):
 
 	def get_group_dns(self):
 		conn = self.directory.generate_connection()
-		return [dn.lower() for dn, attrs in conn.search_s(self.directory.group_dn_base, ldap.SCOPE_ONELEVEL, "uniqueMember={0}".format(self.dn), ["cn"])]
+		return [dn.lower() for dn, attrs in conn.search_s(self.directory.group_dn_base, ldap.SCOPE_ONELEVEL, u"uniqueMember={0}".format(self.dn), ["cn"])]
 
 	def get_groups(self):
 		return [self.directory.get_group_by_dn(group_dn) for group_dn in self.get_group_dns()]
