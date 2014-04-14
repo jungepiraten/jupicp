@@ -28,7 +28,7 @@ class Directory:
 		res = conn.search_s(self.user_dn_base, ldap.SCOPE_ONELEVEL, u"(|(mail={0})(email={0})(otherMailbox={0}))".format(mail))
 		if len(res) != 1:
 			raise AttributeError(u"No such object".format(mail))
-		dn, user = res
+		dn, user = res[0]
 		return self.get_user_by_dn(dn)
 
 	def get_user_by_dn(self, dn):
@@ -225,7 +225,7 @@ class Group(DirectoryResult):
 		self.members = members
 
 	def add_member(self, user):
-		self.set_members(self.members + [ user.dn ])
+		self.set_members(self.members + [ str(user.dn) ])
 		# If this user was invited indivually, this is not longer needed now
 		if user.dn in self.owners:
 			self.set_owners([owner for owner in self.owners if owner.lower() != user.dn.lower()])
