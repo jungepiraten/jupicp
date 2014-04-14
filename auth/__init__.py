@@ -46,7 +46,7 @@ class Directory:
 		return self.get_user(uid)
 	
 	def get_group_dn(self, group):
-		return "cn={name},{base_dn}".format(name=group, base_dn=self.group_dn_base)
+		return "cn={name},{base_dn}".format(name=unicode(group), base_dn=self.group_dn_base)
 	
 	def get_groups(self):
 		conn = self.generate_connection()
