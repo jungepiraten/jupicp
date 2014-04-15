@@ -11,9 +11,9 @@ from django.utils.datastructures import MultiValueDictKeyError
 import mailman
 from jupicp import forms, utils
 
-@utils.classview_dispatcher(csrf_exempt)
+@utils.classview_decorator(csrf_exempt)
 class CheckUserJSONView(utils.JSONView):
-	def do_action(self, **kwargs):
+	def post(self, *args, **kwargs):
 		try:
 			ldap_user = settings.DIRECTORY.get_user(self.request.POST["user"])
 			if not ldap_user.check_password(self.request.POST["password"]):
@@ -212,7 +212,7 @@ class GroupsCreateView(FormView):
 		group = settings.DIRECTORY.create_group(form.cleaned_data["display_name"], form.cleaned_data["description"], [ self.request.user ])
 		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": group.name}))
 
-@utils.classview_dispatcher(utils.raise_404)
+@utils.classview_decorator(utils.raise_404)
 class GroupsDetailView(TemplateView):
 	template_name = "jupicp/groups_detail.html"
 
@@ -228,16 +228,16 @@ class GroupsDetailView(TemplateView):
 			context['may_edit'] = context['group'].may_edit(self.request.user)
 		return context
 
-@utils.classview_dispatcher(utils.raise_404)
+@utils.classview_decorator(utils.raise_404)
 class GroupsDetailJSONView(utils.JSONView):
-	def get_context_data(self, **kwargs):
+	def get(self, *args, **kwargs):
 		try:
 			group = settings.DIRECTORY.get_group(kwargs["group_name"])
 		except:
 			raise ObjectDoesNotExist
 		return {"id": group.name, "name": group.display_name, "description": group.description, "members": [user.name for user in group.get_members()]}
 
-@utils.classview_dispatcher(utils.raise_404)
+@utils.classview_decorator(utils.raise_404)
 class GroupsDeleteView(RedirectView):
 	permanent = False
 
@@ -253,7 +253,7 @@ class GroupsDeleteView(RedirectView):
 
 		return reverse_lazy("groups")
 
-@utils.classview_dispatcher(utils.raise_404)
+@utils.classview_decorator(utils.raise_404)
 class GroupsMemberAddView(RedirectView):
 	permanent = False
 
@@ -272,7 +272,7 @@ class GroupsMemberAddView(RedirectView):
 		
 		return reverse_lazy("groups_detail", kwargs={'group_name':group_name})
 
-@utils.classview_dispatcher(utils.raise_404)
+@utils.classview_decorator(utils.raise_404)
 class GroupsMemberDelView(RedirectView):
 	permanent = False
 	

@@ -14,11 +14,10 @@ def send_mail(data, options, recipient):
 		recipient = [recipient]
 	django.core.mail.send_mail(data['subject'], data['body'].format(**options), data['from'], recipient)
 
-def classview_dispatcher(function):
-	def wrapper(original_class):
-		original_dispatch = original_class.dispatch
-		original_class.dispatch = function(original_dispatch)
-		return original_class
+def classview_decorator(decorator):
+	def wrapper(cls):
+		cls.dispatch = decorator(cls.dispatch)
+		return cls
 	return wrapper
 
 def raise_404(method):
@@ -32,10 +31,9 @@ def raise_404(method):
 	return wrap
 
 class JSONView(View):
-	def get(self, request, *args, **kwargs):
-		context = self.get_context_data(*args, **kwargs)
-		return HttpResponse(json.dumps(context), content_type="application/json")
-
-	def post(self, request, *args, **kwargs):
-		context = self.do_action(*args, **kwargs)
-		return HttpResponse(json.dumps(context), content_type="application/json")
+	def dispatch(self, *args, **kwargs):
+		result = super(JSONView, self).dispatch(*args, **kwargs)
+		if isinstance(result, HttpResponse):
+			return result
+		else:
+			return HttpResponse(json.dumps(result), content_type="application/json")
