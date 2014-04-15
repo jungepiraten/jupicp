@@ -48,4 +48,5 @@ urlpatterns = patterns('',
     url(r'^groups/', jupicp.views.GroupsListView.as_view(), name="groups"),
 
     url(r'json/groups/(?P<group_name>[^/]+)', jupicp.views.GroupsDetailJSONView.as_view()),
+    url(r'json/checkUser', jupicp.views.CheckUserJSONView.as_view()),
 )

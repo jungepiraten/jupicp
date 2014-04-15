@@ -35,3 +35,7 @@ class JSONView(View):
 	def get(self, request, *args, **kwargs):
 		context = self.get_context_data(*args, **kwargs)
 		return HttpResponse(json.dumps(context), content_type="application/json")
+
+	def post(self, request, *args, **kwargs):
+		context = self.do_action(*args, **kwargs)
+		return HttpResponse(json.dumps(context), content_type="application/json")

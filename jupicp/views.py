@@ -1,13 +1,33 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, RedirectView
 from django.views.generic.edit import FormView
 from django.core import signing
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
+from django.utils.datastructures import MultiValueDictKeyError
 
 import mailman
 from jupicp import forms, utils
+
+@utils.classview_dispatcher(csrf_exempt)
+class CheckUserJSONView(utils.JSONView):
+	def do_action(self, **kwargs):
+		try:
+			ldap_user = settings.DIRECTORY.get_user(self.request.POST["user"])
+			if not ldap_user.check_password(self.request.POST["password"]):
+				return {"status": "fail", "message": "Authentification failed"}
+			return {
+				"status": "success",
+				"name": ldap_user.name,
+				"displayName": ldap_user.display_name,
+				"groups": [group.name for group in ldap_user.get_groups()],
+			}
+		except MultiValueDictKeyError:
+			return {"status": "fail", "message": "Need parameters user and password via POST"}
+		except AttributeError:
+			return {"status": "fail", "message": "Authentification failed"}
 
 class RegisterView(FormView):
 	template_name = "jupicp/register.html"
