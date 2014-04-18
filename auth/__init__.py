@@ -18,16 +18,16 @@ class Directory:
 		self.group_dn_base = group_dn_base
 	
 	def get_user_dn(self, uid):
-		return u"uid={name},{base_dn}".format(name=uid, base_dn=self.user_dn_base)
+		return "uid={name},{base_dn}".format(name=uid, base_dn=self.user_dn_base)
 	
 	def get_user(self, uid):
 		return self.get_user_by_dn(self.get_user_dn(uid))
 
 	def get_user_by_mail(self, mail):
 		conn = self.generate_connection()
-		res = conn.search_s(self.user_dn_base, ldap.SCOPE_ONELEVEL, u"(|(mail={0})(email={0})(otherMailbox={0}))".format(mail))
+		res = conn.search_s(self.user_dn_base, ldap.SCOPE_ONELEVEL, "(|(mail={0})(email={0})(otherMailbox={0}))".format(mail))
 		if len(res) != 1:
-			raise AttributeError(u"No such object".format(mail))
+			raise AttributeError("No such object".format(mail))
 		dn, user = res[0]
 		return self.get_user_by_dn(dn)
 
@@ -38,15 +38,15 @@ class Directory:
 		conn = self.generate_connection()
 		conn.add_s(self.get_user_dn(uid), ldap.modlist.addModlist({
 			'objectClass': ["inetOrgPerson", "extensibleObject"],
-			'cn': uid,
-			'email': externalMail,
-			'userPassword': password,
-			'sn': uid,
+			'cn': str(uid),
+			'otherMailbox': str(externalMail),
+			'userPassword': str(password),
+			'sn': str(uid),
 			}))
 		return self.get_user(uid)
 	
 	def get_group_dn(self, group):
-		return u"cn={name},{base_dn}".format(name=group, base_dn=self.group_dn_base)
+		return "cn={name},{base_dn}".format(name=group, base_dn=self.group_dn_base)
 	
 	def get_groups(self):
 		conn = self.generate_connection()
@@ -64,9 +64,9 @@ class Directory:
 		conn = self.generate_connection()
 		conn.add_s(self.get_group_dn(group), ldap.modlist.addModlist({
 			'objectClass': ["groupOfUniqueNames", "extensibleObject"],
-			'cn': group,
-			'displayName': display_name,
-			'description': description,
+			'cn': str(group),
+			'displayName': str(display_name),
+			'description': str(description),
 			'owner': [ owner.dn for owner in owners ],
 			'manager': [ manager.dn for manager in managers ] if managers != [] else [ member.dn for member in members ],
 			'uniqueMember': [ member.dn for member in members ]
@@ -162,7 +162,7 @@ class User(DirectoryResult):
 
 	def get_group_dns(self):
 		conn = self.directory.generate_connection()
-		return [dn.lower() for dn, attrs in conn.search_s(self.directory.group_dn_base, ldap.SCOPE_ONELEVEL, u"uniqueMember={0}".format(self.dn), ["cn"])]
+		return [dn.lower() for dn, attrs in conn.search_s(self.directory.group_dn_base, ldap.SCOPE_ONELEVEL, "uniqueMember={0}".format(self.dn), ["cn"])]
 
 	def get_groups(self):
 		return [self.directory.get_group_by_dn(group_dn) for group_dn in self.get_group_dns()]
