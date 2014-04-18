@@ -128,7 +128,7 @@ class User(DirectoryResult):
 		conn.modify_s(self.dn, ldap.modlist.modifyModlist({
 			"cn": self.attrs["cn"] if "cn" in self.attrs else []
 		}, {
-			"cn": common_name
+			"cn": str(common_name)
 		}))
 		self.attrs["cn"] = [common_name]
 		self.common_name = common_name
