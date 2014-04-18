@@ -5,6 +5,7 @@ import json
 import django.core.mail
 from django.views.generic import View
 from django.http import HttpResponse
+from django.core.exceptions import PermissionDenied
 
 def generate_password(length=8):
 	return ''.join(choice(string.letters + string.digits) for _ in xrange(length))

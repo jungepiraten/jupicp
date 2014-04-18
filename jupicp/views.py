@@ -96,7 +96,8 @@ class MailinglistsListView(TemplateView):
 				lists[mlist.host_name] = {}
 			lists[mlist.host_name][listname] = mlist
 		context['lists'] = lists
-		context['mails'] = self.request.user.get_mails(only_verified=True)
+		if self.request.user:
+			context['mails'] = self.request.user.get_mails(only_verified=True)
 		return context
 
 class ProfileView(FormView):
@@ -207,7 +208,7 @@ class GroupsCreateView(FormView):
 	form_class = forms.GroupsCreateForm
 	
 	def form_valid(self, form):
-		if not self.request.user or not self.request.user.match_dn(settings.ADMIN_DN):
+		if not self.request.user.match_dn(settings.ADMIN_DN):
 			raise PermissionDenied
 		group = settings.DIRECTORY.create_group(form.cleaned_data["display_name"], form.cleaned_data["description"], [ self.request.user ])
 		return HttpResponseRedirect(reverse_lazy("groups_detail", kwargs={"group_name": group.name}))

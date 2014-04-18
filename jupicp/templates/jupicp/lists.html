@@ -12,20 +12,22 @@
    <tr>
     <th width="25%">{% trans "List" %}</th>
     <th width="45%">{% trans "Description" %}</th>
-    <th>{% trans "Subscription" %}</th>
+    {% if mails %}<th>{% trans "Subscription" %}</th>{% endif %}
    </tr>
   </thead>
   {% for listname, list in domainlists.iteritems %}
    <tr>
     <th><i class="glyphicon glyphicon-envelope"></i> {{ list.real_name }}</th>
     <td>{{ list.description }}</td>
-    <td><select name="subscription_{{listname}}"><option></option>{% for mail in mails %}<option {% if mail.mail in list.members %}selected="selected"{% endif %}>{{ mail.mail }}</option>{% endfor %}</select></td>
+    {% if mails %}<td><select name="subscription_{{listname}}"><option></option>{% for mail in mails %}<option {% if mail.mail in list.members %}selected="selected"{% endif %}>{{ mail.mail }}</option>{% endfor %}</select></td>{% endif %}
    </tr>
   {% endfor %}
  </table>
  {% endfor %}
+ {% if mails %}
  <div class="form-actions">
   <button type="submit" class="btn btn-primary pull-right">{% trans "Save" %}</button>
  </div>
+ {% endif %}
 </form>
 {% endblock %}
