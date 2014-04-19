@@ -155,7 +155,7 @@ class User(DirectoryResult):
 		self.set_external_mails(external_mails)
 	
 	def add_external_mail(self, external_mail):
-		self.set_external_mails(self.external_mails + [{"verified": False, "mail": external_mail}])
+		self.set_external_mails(self.external_mails + [{"verified": False, "mail": str(external_mail)}])
 
 	def del_external_mail(self, external_mail):
 		self.set_external_mails([m for m in self.external_mails if m['mail'] != external_mail])
