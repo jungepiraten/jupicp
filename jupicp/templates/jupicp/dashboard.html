@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="page-header">
- <h1>{% blocktrans with username=user.name %}Hello {{username}},{% endblocktrans %} <small>{% trans "have a great day" %}</small></h1>
+ <h1>{% blocktrans with username=user.display_name %}Hello {{username}},{% endblocktrans %} <small>{% trans "have a great day" %}</small></h1>
 </div>
 
 <div class="row">
