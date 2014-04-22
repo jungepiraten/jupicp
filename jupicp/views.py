@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, RedirectView
 from django.views.generic.edit import FormView
 from django.core import signing
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -156,7 +156,7 @@ class MailVerifySendView(RedirectView):
 
 	def get_redirect_url(self, mail):
 		token = signing.dumps([mail, self.request.user.name])
-		token_link = self.request.build_absolute_uri(reverse_lazy("mails_verify", kwargs={"data_signed":token}))
+		token_link = self.request.build_absolute_uri(reverse("mails_verify", kwargs={"data_signed":token}))
 		
 		utils.send_mail(settings.JUPICP_VERIFYMAIL, {'username': self.request.user.name, 'mail': mail, 'token': token, 'token_link': token_link}, mail)
 		return reverse_lazy("dashboard")
