@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-11 13:48+0200\n"
+"POT-Creation-Date: 2014-05-19 11:42+0200\n"
 "PO-Revision-Date: 2014-03-20 18:52+0100\n"
 "Last-Translator: Patrick Rauscher <patrick.rauscher@junge-piraten.de>\n"
 "Language-Team: English <en@li.org>\n"
@@ -90,53 +90,57 @@ msgstr "Please enter the CAPTCHA solution."
 msgid "Are you human?"
 msgstr "Are you human?"
 
-#: jupicp/forms.py:9
+#: jupicp/forms.py:11
 msgid "Current password"
 msgstr "Current password"
 
-#: jupicp/forms.py:10
+#: jupicp/forms.py:12
 msgid "Display name"
 msgstr "Display name"
 
-#: jupicp/forms.py:11
+#: jupicp/forms.py:13
 msgid "New password"
 msgstr "New password"
 
-#: jupicp/forms.py:12
+#: jupicp/forms.py:14
 msgid "Confirm new password"
 msgstr "Confirm new password"
 
-#: jupicp/forms.py:21
+#: jupicp/forms.py:23
 msgid "Wrong Password"
 msgstr "Wrong password"
 
-#: jupicp/forms.py:26
+#: jupicp/forms.py:28
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: jupicp/forms.py:30
+#: jupicp/forms.py:32
 msgid ""
 "three to 25 characters. may only consist of letters, digits, hypens and dots"
 msgstr ""
 "three to 25 characters. may only consist of letters, digits, hypens and dots"
 
-#: jupicp/forms.py:38
+#: jupicp/forms.py:40
+msgid "Username on blacklist"
+msgstr "Username is not allowed"
+
+#: jupicp/forms.py:44
 msgid "User already exists"
 msgstr "User already exists"
 
-#: jupicp/forms.py:48
+#: jupicp/forms.py:54
 msgid "Mail already used"
 msgstr "Mail already used"
 
-#: jupicp/forms.py:67
+#: jupicp/forms.py:73
 msgid "User not found"
 msgstr "User not found"
 
-#: jupicp/forms.py:72
+#: jupicp/forms.py:78
 msgid "Name"
 msgstr "Name"
 
-#: jupicp/forms.py:73 jupicp/templates/jupicp/lists.html:12
+#: jupicp/forms.py:79 jupicp/templates/jupicp/lists.html:14
 msgid "Description"
 msgstr "Description"
 
@@ -271,15 +275,15 @@ msgstr ""
 "them on our <a href=\"//forum.junge-piraten.de\">Webforum</a> too. They are "
 "also available as shared Folders."
 
-#: jupicp/templates/jupicp/lists.html:11
+#: jupicp/templates/jupicp/lists.html:13
 msgid "List"
 msgstr "List"
 
-#: jupicp/templates/jupicp/lists.html:13
+#: jupicp/templates/jupicp/lists.html:15
 msgid "Subscription"
 msgstr "Subscription"
 
-#: jupicp/templates/jupicp/lists.html:25
+#: jupicp/templates/jupicp/lists.html:29
 #: jupicp/templates/jupicp/profile.html:15
 msgid "Save"
 msgstr "Save"

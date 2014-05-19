@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 import recaptcha_form.forms
 
+import re
+
 class ProfileForm(forms.Form):
 	current_password = forms.CharField(label=_("Current password"), widget=forms.PasswordInput)
 	display_name = forms.CharField(label=_("Display name"))
@@ -27,12 +29,16 @@ class ProfileForm(forms.Form):
 		return self.cleaned_data["confirm_password"]
 
 class RegisterForm(recaptcha_form.forms.RecaptchaForm):
-	user = forms.CharField(validators=[validators.RegexValidator("^[-a-zA-Z0-9\\.]{3,25}$")] + [validators.RegexValidator(v, inverse_match=True) for v in settings.JUPICP_USERBLACKLIST], help_text=_("three to 25 characters. may only consist of letters, digits, hypens and dots"))
+	user = forms.CharField(validators=[validators.RegexValidator("^[-a-zA-Z0-9\\.]{3,25}$")], help_text=_("three to 25 characters. may only consist of letters, digits, hypens and dots"))
 	mail = forms.EmailField()
 
 	def clean_user(self):
 		# Check if username is already in use
 		user_name = self.cleaned_data['user']
+		for v in settings.JUPICP_USERBLACKLIST:
+			if re.match(v, user_name):
+				raise forms.ValidationError(_("Username on blacklist"));
+
 		try:
 			settings.DIRECTORY.get_user(user_name)
 			raise forms.ValidationError(_("User already exists"))

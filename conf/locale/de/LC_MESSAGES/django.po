@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-11 13:48+0200\n"
+"POT-Creation-Date: 2014-05-19 11:42+0200\n"
 "PO-Revision-Date: 2013-10-17 23:58+0000\n"
 "Last-Translator: Patrick Rauscher <prauscher@prauscher.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -92,54 +92,58 @@ msgstr "Bitte löse das CAPTCHA."
 msgid "Are you human?"
 msgstr "Bist du ein Mensch?"
 
-#: jupicp/forms.py:9
+#: jupicp/forms.py:11
 msgid "Current password"
 msgstr "Momentanes Passwort"
 
-#: jupicp/forms.py:10
+#: jupicp/forms.py:12
 msgid "Display name"
 msgstr "Anzeigename"
 
-#: jupicp/forms.py:11
+#: jupicp/forms.py:13
 msgid "New password"
 msgstr "Neues Passwort"
 
-#: jupicp/forms.py:12
+#: jupicp/forms.py:14
 msgid "Confirm new password"
 msgstr "Neues Passwort bestätigen"
 
-#: jupicp/forms.py:21
+#: jupicp/forms.py:23
 msgid "Wrong Password"
 msgstr "Passwort fehlerhaft"
 
-#: jupicp/forms.py:26
+#: jupicp/forms.py:28
 msgid "Passwords do not match"
 msgstr "Die Passwörter stimmen nicht überein"
 
-#: jupicp/forms.py:30
+#: jupicp/forms.py:32
 msgid ""
 "three to 25 characters. may only consist of letters, digits, hypens and dots"
 msgstr ""
 "drei bis 25 Zeichen. Darf nur aus Buchstaben, Ziffern, Bindestrichen und "
 "Punkten bestehen"
 
-#: jupicp/forms.py:38
+#: jupicp/forms.py:40
+msgid "Username on blacklist"
+msgstr "Nutzer*innenname nicht erlaubt"
+
+#: jupicp/forms.py:44
 msgid "User already exists"
 msgstr "Nutzer*innenname existiert bereits"
 
-#: jupicp/forms.py:48
+#: jupicp/forms.py:54
 msgid "Mail already used"
 msgstr "Diese Mailadresse wird bereits verwendet"
 
-#: jupicp/forms.py:67
+#: jupicp/forms.py:73
 msgid "User not found"
 msgstr "Nutzer*innenname nicht gefunden"
 
-#: jupicp/forms.py:72
+#: jupicp/forms.py:78
 msgid "Name"
 msgstr "Name"
 
-#: jupicp/forms.py:73 jupicp/templates/jupicp/lists.html:12
+#: jupicp/forms.py:79 jupicp/templates/jupicp/lists.html:14
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -273,15 +277,15 @@ msgstr ""
 "Hier findest du unsere (öffentlichen) mailinglisten. Du kannst sie auch in "
 "unserem <a href=\"//forum.junge-piraten.de\">Webforum</a> lesen."
 
-#: jupicp/templates/jupicp/lists.html:11
+#: jupicp/templates/jupicp/lists.html:13
 msgid "List"
 msgstr "Liste"
 
-#: jupicp/templates/jupicp/lists.html:13
+#: jupicp/templates/jupicp/lists.html:15
 msgid "Subscription"
 msgstr "Abbonniert"
 
-#: jupicp/templates/jupicp/lists.html:25
+#: jupicp/templates/jupicp/lists.html:29
 #: jupicp/templates/jupicp/profile.html:15
 msgid "Save"
 msgstr "Speichern"
