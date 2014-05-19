@@ -27,7 +27,7 @@ class ProfileForm(forms.Form):
 		return self.cleaned_data["confirm_password"]
 
 class RegisterForm(recaptcha_form.forms.RecaptchaForm):
-	user = forms.CharField(validators=[validators.RegexValidator("^[-a-zA-Z0-9\\.]{3,25}$")], help_text=_("three to 25 characters. may only consist of letters, digits, hypens and dots"))
+	user = forms.CharField(validators=[validators.RegexValidator("^[-a-zA-Z0-9\\.]{3,25}$")] + [validators.RegexValidator(v) for v in settings.JUPICP_USERBLACKLIST], help_text=_("three to 25 characters. may only consist of letters, digits, hypens and dots"))
 	mail = forms.EmailField()
 
 	def clean_user(self):
