@@ -8,16 +8,8 @@ import jupicp.views
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^jupicp/', include('jupicp.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-
+urlpatterns = patterns(
+    '',
     url(r'^$', require_login(jupicp.views.DashboardView.as_view()), name='dashboard'),
     url(r'^login/', auth.views.LoginView.as_view(), name="login"),
     url(r'^logout/', auth.views.LogoutView.as_view(), name="logout"),
