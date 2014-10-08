@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-19 11:42+0200\n"
+"POT-Creation-Date: 2014-10-08 17:29+0200\n"
 "PO-Revision-Date: 2014-03-20 18:52+0100\n"
 "Last-Translator: Patrick Rauscher <patrick.rauscher@junge-piraten.de>\n"
 "Language-Team: English <en@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: auth/forms.py:16
+#: auth/forms.py:17
 msgid "Wrong Username or Password"
 msgstr "Wrong Username or Password"
 
@@ -90,57 +90,66 @@ msgstr "Please enter the CAPTCHA solution."
 msgid "Are you human?"
 msgstr "Are you human?"
 
-#: jupicp/forms.py:11
+#: jupicp/forms.py:12
 msgid "Current password"
 msgstr "Current password"
 
-#: jupicp/forms.py:12
+#: jupicp/forms.py:13
+msgid "Given name"
+msgstr "Given name"
+
+#: jupicp/forms.py:14
+#, fuzzy
+msgid "Surname"
+msgstr "Surname"
+
+#: jupicp/forms.py:15
 msgid "Display name"
 msgstr "Display name"
 
-#: jupicp/forms.py:13
+#: jupicp/forms.py:16
 msgid "New password"
 msgstr "New password"
 
-#: jupicp/forms.py:14
+#: jupicp/forms.py:17
 msgid "Confirm new password"
 msgstr "Confirm new password"
 
-#: jupicp/forms.py:23
+#: jupicp/forms.py:26
 msgid "Wrong Password"
 msgstr "Wrong password"
 
-#: jupicp/forms.py:28
+#: jupicp/forms.py:31
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: jupicp/forms.py:32
+#: jupicp/forms.py:36
 msgid ""
 "three to 25 characters. may only consist of letters, digits, hypens and dots"
 msgstr ""
 "three to 25 characters. may only consist of letters, digits, hypens and dots"
 
-#: jupicp/forms.py:40
+#: jupicp/forms.py:44
 msgid "Username on blacklist"
 msgstr "Username is not allowed"
 
-#: jupicp/forms.py:44
+#: jupicp/forms.py:48
 msgid "User already exists"
 msgstr "User already exists"
 
-#: jupicp/forms.py:54
+#: jupicp/forms.py:58
 msgid "Mail already used"
 msgstr "Mail already used"
 
-#: jupicp/forms.py:73
+#: jupicp/forms.py:78
 msgid "User not found"
 msgstr "User not found"
 
-#: jupicp/forms.py:78
+#: jupicp/forms.py:84
 msgid "Name"
 msgstr "Name"
 
-#: jupicp/forms.py:79 jupicp/templates/jupicp/lists.html:14
+#: jupicp/forms.py:85 jupicp/templates/jupicp/lists.html:14
 msgid "Description"
 msgstr "Description"
 

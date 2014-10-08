@@ -116,7 +116,7 @@ class ProfileView(FormView):
     success_url = reverse_lazy("profile_done")
 
     def get_initial(self):
-        return {"display_name": self.request.user.display_name}
+        return {"given_name": self.request.user.given_name, "surname": self.request.user.surname, "display_name": self.request.user.display_name}
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProfileView, self).get_context_data(*args, **kwargs)
@@ -131,7 +131,7 @@ class ProfileView(FormView):
     def form_valid(self, form):
         if form.cleaned_data["new_password"]:
             self.request.user.set_password(form.cleaned_data["new_password"])
-        self.request.user.set_display_name(form.cleaned_data["display_name"])
+        self.request.user.set_names(form.cleaned_data["given_name"], form.cleaned_data["surname"], form.cleaned_data["display_name"])
         return super(ProfileView, self).form_valid(form)
 
 

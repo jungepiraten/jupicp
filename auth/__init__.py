@@ -103,6 +103,8 @@ class User(DirectoryResult):
             self.external_mails = self.external_mails + [{"verified": False, "mail": mail} for mail in attrs["otherMailbox"]]
         if "email" in attrs:
             self.external_mails = self.external_mails + [{"verified": True, "mail": mail} for mail in attrs["email"]]
+        self.given_name = attrs["givenName"][0] if "givenName" in attrs else ""
+        self.surname = attrs["sn"][0] if "sn" in attrs else ""
         self.common_name = attrs["cn"][0]
         self.member_id = attrs["employeeNumber"][0] if "employeeNumber" in attrs else None
 
@@ -127,13 +129,21 @@ class User(DirectoryResult):
         conn = self.directory.generate_connection()
         conn.passwd_s(self.dn, None, password)
 
-    def set_display_name(self, common_name):
+    def set_names(self, given_name, surname, common_name):
         conn = self.directory.generate_connection()
         conn.modify_s(self.dn, ldap.modlist.modifyModlist({
+            "givenName": self.attrs["givenName"] if "givenName" in self.attrs else [],
+            "sn": self.attrs["sn"] if "sn" in self.attrs else [],
             "cn": self.attrs["cn"] if "cn" in self.attrs else []
         }, {
+            "givenName": str(given_name) if given_name != "" else [],
+            "sn": str(surname) if surname != "" else [],
             "cn": str(common_name)
         }))
+        self.attrs["givenName"] = [given_name]
+        self.given_name = given_name
+        self.attrs["sn"] = [surname]
+        self.surname = surname
         self.attrs["cn"] = [common_name]
         self.common_name = common_name
 
