@@ -10,8 +10,8 @@ import re
 
 class ProfileForm(forms.Form):
     current_password = forms.CharField(label=_("Current password"), widget=forms.PasswordInput)
-    given_name = forms.CharField(label=_("Given name"))
-    surname = forms.CharField(label=_("Surname"))
+    given_name = forms.CharField(label=_("Given name"), required=False)
+    surname = forms.CharField(label=_("Surname"), required=False)
     display_name = forms.CharField(label=_("Display name"))
     new_password = forms.CharField(label=_("New password"), widget=forms.PasswordInput, required=False)
     confirm_password = forms.CharField(label=_("Confirm new password"), widget=forms.PasswordInput, required=False)
