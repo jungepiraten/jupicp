@@ -43,7 +43,7 @@ class Directory:
             'cn': str(uid),
             'otherMailbox': str(externalMail),
             'userPassword': str(password),
-            'sn': str(uid),
+            'sn': "-",
         }))
         return self.get_user(uid)
 
@@ -104,7 +104,7 @@ class User(DirectoryResult):
         if "email" in attrs:
             self.external_mails = self.external_mails + [{"verified": True, "mail": mail} for mail in attrs["email"]]
         self.given_name = attrs["givenName"][0] if "givenName" in attrs else ""
-        self.surname = attrs["sn"][0] if "sn" in attrs else ""
+        self.surname = attrs["sn"][0] if attrs["sn"][0] != "-" else ""
         self.common_name = attrs["cn"][0]
         self.member_id = attrs["employeeNumber"][0] if "employeeNumber" in attrs else None
 
@@ -137,12 +137,12 @@ class User(DirectoryResult):
             "cn": self.attrs["cn"] if "cn" in self.attrs else []
         }, {
             "givenName": str(given_name) if given_name != "" else [],
-            "sn": str(surname) if surname != "" else [],
+            "sn": str(surname) if surname != "" else ["-"],
             "cn": str(common_name)
         }))
         self.attrs["givenName"] = [given_name]
         self.given_name = given_name
-        self.attrs["sn"] = [surname]
+        self.attrs["sn"] = [surname if surname != "" else "-"]
         self.surname = surname
         self.attrs["cn"] = [common_name]
         self.common_name = common_name
