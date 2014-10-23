@@ -40,9 +40,9 @@ class Directory:
         conn = self.generate_connection()
         conn.add_s(self.get_user_dn(uid), ldap.modlist.addModlist({
             'objectClass': ["inetOrgPerson", "extensibleObject"],
-            'cn': str(uid),
-            'otherMailbox': str(externalMail),
-            'userPassword': str(password),
+            'cn': uid.encode("utf-8"),
+            'otherMailbox': externalMail.encode("utf-8"),
+            'userPassword': password.encode("utf-8"),
             'sn': "-",
         }))
         return self.get_user(uid)
@@ -66,9 +66,9 @@ class Directory:
         conn = self.generate_connection()
         conn.add_s(self.get_group_dn(group), ldap.modlist.addModlist({
             'objectClass': ["groupOfUniqueNames", "extensibleObject"],
-            'cn': str(group),
-            'displayName': str(display_name),
-            'description': str(description),
+            'cn': group.encode("utf-8"),
+            'displayName': display_name.encode("utf-8"),
+            'description': description.encode("utf-8"),
             'owner': [owner.dn for owner in owners],
             'manager': [manager.dn for manager in managers] if managers != [] else [member.dn for member in members],
             'uniqueMember': [member.dn for member in members]
@@ -136,9 +136,9 @@ class User(DirectoryResult):
             "sn": self.attrs["sn"] if "sn" in self.attrs else [],
             "cn": self.attrs["cn"] if "cn" in self.attrs else []
         }, {
-            "givenName": str(given_name) if given_name != "" else [],
-            "sn": str(surname) if surname != "" else ["-"],
-            "cn": str(common_name)
+            "givenName": given_name.encode("utf-8") if given_name != "" else [],
+            "sn": surname.encode("utf-8") if surname != "" else ["-"],
+            "cn": common_name.encode("utf-8")
         }))
         self.attrs["givenName"] = [given_name]
         self.given_name = given_name
@@ -169,7 +169,7 @@ class User(DirectoryResult):
         self.set_external_mails(external_mails)
 
     def add_external_mail(self, external_mail):
-        self.set_external_mails(self.external_mails + [{"verified": False, "mail": str(external_mail)}])
+        self.set_external_mails(self.external_mails + [{"verified": False, "mail": external_mail.encode("utf-8")}])
 
     def del_external_mail(self, external_mail):
         self.set_external_mails([m for m in self.external_mails if m['mail'] != external_mail])
@@ -240,7 +240,7 @@ class Group(DirectoryResult):
         self.members = members
 
     def add_member(self, user):
-        self.set_members(self.members + [str(user.dn)])
+        self.set_members(self.members + [user.dn.encode("utf-8")])
         # If this user was invited indivually, this is not longer needed now
         if user.dn in self.owners:
             self.set_owners([owner for owner in self.owners if owner.lower() != user.dn.lower()])
