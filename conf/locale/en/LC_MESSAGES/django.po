@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-08 17:29+0200\n"
+"POT-Creation-Date: 2014-10-25 13:36+0200\n"
 "PO-Revision-Date: 2014-03-20 18:52+0100\n"
 "Last-Translator: Patrick Rauscher <patrick.rauscher@junge-piraten.de>\n"
 "Language-Team: English <en@li.org>\n"
@@ -206,26 +206,32 @@ msgid "remove mailaddress"
 msgstr "remove mailaddress"
 
 #: jupicp/templates/jupicp/dashboard.html:23
-msgid "verified mailaddress"
-msgstr "verified mailaddress"
+#, fuzzy
+msgid "primary mailaddress"
+msgstr "add mailaddress"
 
 #: jupicp/templates/jupicp/dashboard.html:25
+#, fuzzy
+msgid "verified mailaddress, click to make primary"
+msgstr "verified mailaddress, click to make primary"
+
+#: jupicp/templates/jupicp/dashboard.html:27
 msgid "resend confirmationlink"
 msgstr "resend confirmationlink"
 
-#: jupicp/templates/jupicp/dashboard.html:35
+#: jupicp/templates/jupicp/dashboard.html:37
 msgid "add mailaddress"
 msgstr "add mailaddress"
 
-#: jupicp/templates/jupicp/dashboard.html:37
+#: jupicp/templates/jupicp/dashboard.html:39
 msgid "mailaddress"
 msgstr "mailaddress"
 
-#: jupicp/templates/jupicp/dashboard.html:48
+#: jupicp/templates/jupicp/dashboard.html:50
 msgid "Your groupmemberships"
 msgstr "Your groupmemberships"
 
-#: jupicp/templates/jupicp/dashboard.html:53
+#: jupicp/templates/jupicp/dashboard.html:55
 msgid "leave group"
 msgstr "leave group"
 

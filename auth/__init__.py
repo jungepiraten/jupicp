@@ -97,12 +97,17 @@ class User(DirectoryResult):
     def fill_attrs(self, attrs):
         self.name = attrs["uid"][0]
         self.display_name = attrs["cn"][0] if "cn" in attrs else attrs["uid"][0]
-        self.mail = attrs["mail"][0] if "mail" in attrs else None
+        self.mail = None
+        self.primary_mail = None
         self.external_mails = []
         if "otherMailbox" in attrs:
             self.external_mails = self.external_mails + [{"verified": False, "mail": mail} for mail in attrs["otherMailbox"]]
         if "email" in attrs:
+            self.primary_mail = attrs["email"][0]
             self.external_mails = self.external_mails + [{"verified": True, "mail": mail} for mail in attrs["email"]]
+        if "mail" in attrs:
+            self.primary_mail = attrs["mail"][0]
+            self.mail = attrs["mail"][0]
         self.given_name = attrs["givenName"][0] if "givenName" in attrs else ""
         self.surname = attrs["sn"][0] if attrs["sn"][0] != "-" else ""
         self.common_name = attrs["cn"][0]
@@ -149,14 +154,25 @@ class User(DirectoryResult):
 
     def set_external_mails(self, external_mails):
         conn = self.directory.generate_connection()
+        # Add test-item to cause a "real" change, even if there was just reordering
         conn.modify_s(self.dn, ldap.modlist.modifyModlist({
             "otherMailbox": [m['mail'] for m in self.external_mails if not m['verified']],
             "emailAddress": [m['mail'] for m in self.external_mails if m['verified']]
+        }, {
+            "otherMailbox": [m['mail'] for m in external_mails if not m['verified']] + ["_TOBEREMOVED"],
+            "emailAddress": [m['mail'] for m in external_mails if m['verified']] + ["_TOBEREMOVED"]
+        }))
+        conn.modify_s(self.dn, ldap.modlist.modifyModlist({
+            "otherMailbox": [m['mail'] for m in external_mails if not m['verified']] + ["_TOBEREMOVED"],
+            "emailAddress": [m['mail'] for m in external_mails if m['verified']] + ["_TOBEREMOVED"]
         }, {
             "otherMailbox": [m['mail'] for m in external_mails if not m['verified']],
             "emailAddress": [m['mail'] for m in external_mails if m['verified']]
         }))
         self.external_mails = external_mails
+
+    def set_primary_mail(self, primary_mail):
+        self.set_external_mails([m for m in self.external_mails if m['mail'] == primary_mail] + [m for m in self.external_mails if m['mail'] != primary_mail])
 
     def verify_external_mail(self, external_mail):
         external_mails = []

@@ -19,8 +19,10 @@
       <tr>
        <td><a href="{% url "mails_del" mail.mail %}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash" title="{% trans "remove mailaddress" %}"></i></a></td>
        <td>
-        {% if mail.verified %}
-         <p class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok" title="{% trans "verified mailaddress" %}"></i></p>
+        {% if mail.mail == user.primary_mail %}
+         <p class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-star" title="{% trans "primary mailaddress" %}"></i></a>
+        {% elif mail.verified %}
+         <a href="{% url "mails_set_primary" mail.mail %}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok" title="{% trans "verified mailaddress, click to make primary" %}"></i></a>
         {% else %}
          <a href="{% url "mails_verify_send" mail.mail %}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-repeat" title="{% trans "resend confirmationlink" %}"></i></a>
         {% endif %}

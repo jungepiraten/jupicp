@@ -24,6 +24,7 @@ urlpatterns = patterns(
     url(r'^mails/verify/(?P<data_signed>[^/]+)', jupicp.views.MailVerifyView.as_view(), name="mails_verify"),
     url(r'^mails/(?P<mail>[^/]+)/del', require_login(jupicp.views.MailDelView.as_view()), name="mails_del"),
     url(r'^mails/(?P<mail>[^/]+)/verify', require_login(jupicp.views.MailVerifySendView.as_view()), name="mails_verify_send"),
+    url(r'^mails/(?P<mail>[^/]+)/set_primary', require_login(jupicp.views.MailSetPrimaryView.as_view()), name="mails_set_primary"),
 
     url(r'^membership/connect/', require_login(jupicp.views.ConnectMembershipView.as_view()), name="membership_connect"),
     url(r'^membership/join/', require_login(jupicp.views.JoinMembershipView.as_view()), name="membership_join"),

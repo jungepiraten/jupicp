@@ -188,6 +188,14 @@ class MailVerifyView(TemplateView):
         return context
 
 
+class MailSetPrimaryView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, mail):
+        self.request.user.set_primary_mail(mail)
+        return reverse_lazy("dashboard")
+
+
 class PasswordView(FormView):
     template_name = "jupicp/password.html"
     form_class = forms.PasswordForm
