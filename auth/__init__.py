@@ -264,6 +264,21 @@ class Group(DirectoryResult):
     def del_member(self, user):
         self.set_members([member for member in self.members if member.lower() != user.dn.lower()])
 
+    def set_managers(self, managers):
+        conn = self.directory.generate_connection()
+        conn.modify_s(self.dn, ldap.modlist.modifyModlist({
+            'manager': self.managers
+        }, {
+            'manager': managers
+        }))
+        self.managers = managers
+
+    def add_manager(self, user):
+        self.set_managers(self.managers + [user.dn.encode("utf-8")])
+
+    def del_manager(self, user):
+        self.set_managers([manager for manager in self.managers if manager.lower() != user.dn.lower()])
+
     def delete(self):
         conn = self.directory.generate_connection()
         conn.delete_s(self.dn)

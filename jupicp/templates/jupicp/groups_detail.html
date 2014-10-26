@@ -25,7 +25,16 @@
     <table>
      {% for member in group.get_members %}
       <tr>
-       <td>{% if may_edit %}<a href="{% url "groups_member_del" group.name member.name %}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash" title="{% trans "remove member" %}"></i></a>{% endif %}</td>
+       <td>
+        {% if may_edit %}<a href="{% url "groups_member_del" group.name member.name %}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash" title="{% trans "remove member" %}"></i></a>{% endif %}
+        {% if is_member or may_edit %}
+         {% if member.dn|lower in group.managers|lower %}
+          <{% if may_edit %}a href="{% url "groups_manager_del" group.name member.name %}"{% else %}p{% endif %} class="btn btn-xs btn-default"><i class="glyphicon glyphicon-star" title="{% trans "user is manager" %}"></i></{% if may_edit %}a{% else %}p{% endif %}>
+         {% else %}
+          <{% if may_edit %}a href="{% url "groups_manager_add" group.name member.name %}"{% else %}p{% endif %} class="btn btn-xs btn-default"><i class="glyphicon glyphicon-star-empty" title="{% trans "user is a regular member" %}"></i></{% if may_edit %}a{% else %}p{% endif %}>
+         {% endif %}
+        {% endif %}
+       </td>
        <th>{{ member.name }}</th>
       </tr>
      {% endfor %}

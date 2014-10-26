@@ -319,3 +319,41 @@ class GroupsMemberDelView(RedirectView):
         group.del_member(user)
 
         return reverse_lazy("groups_detail", kwargs={'group_name': group_name})
+
+
+@utils.classview_decorator(utils.raise_404)
+class GroupsManagerAddView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, group_name, user_name=None):
+        try:
+            group = settings.DIRECTORY.get_group(group_name)
+            if not user_name:
+                user_name = self.request.POST["user"]
+            user = settings.DIRECTORY.get_user(user_name)
+        except:
+            raise ObjectDoesNotExist
+
+        if not group.may_edit(self.request.user):
+            raise PermissionDenied
+        group.add_manager(user)
+
+        return reverse_lazy("groups_detail", kwargs={'group_name': group_name})
+
+
+@utils.classview_decorator(utils.raise_404)
+class GroupsManagerDelView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, group_name, user_name):
+        try:
+            group = settings.DIRECTORY.get_group(group_name)
+            user = settings.DIRECTORY.get_user(user_name)
+        except:
+            raise ObjectDoesNotExist
+
+        if not group.may_edit(self.request.user):
+            raise PermissionDenied
+        group.del_manager(user)
+
+        return reverse_lazy("groups_detail", kwargs={'group_name': group_name})
