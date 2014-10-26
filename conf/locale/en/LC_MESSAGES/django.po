@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Patrick Rauscher <patrick.rauscher@junge-piraten.de>, 2014.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
@@ -99,7 +98,6 @@ msgid "Given name"
 msgstr "Given name"
 
 #: jupicp/forms.py:14
-#, fuzzy
 msgid "Surname"
 msgstr "Surname"
 
@@ -206,12 +204,10 @@ msgid "remove mailaddress"
 msgstr "remove mailaddress"
 
 #: jupicp/templates/jupicp/dashboard.html:23
-#, fuzzy
 msgid "primary mailaddress"
 msgstr "add mailaddress"
 
 #: jupicp/templates/jupicp/dashboard.html:25
-#, fuzzy
 msgid "verified mailaddress, click to make primary"
 msgstr "verified mailaddress, click to make primary"
 
@@ -273,7 +269,6 @@ msgid "remove member"
 msgstr "remove member"
 
 #: jupicp/templates/jupicp/groups_detail.html:32
-#, fuzzy
 msgid "user is manager"
 msgstr "user is manager"
 

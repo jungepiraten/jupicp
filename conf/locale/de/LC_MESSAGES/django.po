@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Patrick Rauscher <prauscher@prauscher.de>
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
@@ -101,7 +100,6 @@ msgid "Given name"
 msgstr "Vorname"
 
 #: jupicp/forms.py:14
-#, fuzzy
 msgid "Surname"
 msgstr "Nachname"
 
@@ -208,12 +206,10 @@ msgid "remove mailaddress"
 msgstr "Mailadresse entfernen"
 
 #: jupicp/templates/jupicp/dashboard.html:23
-#, fuzzy
 msgid "primary mailaddress"
 msgstr "Mailadresse hinzufügen"
 
 #: jupicp/templates/jupicp/dashboard.html:25
-#, fuzzy
 msgid "verified mailaddress, click to make primary"
 msgstr "Verifizierte Mailadresse, klicken um als primäre Mailadresse zu setzen"
 
@@ -275,7 +271,6 @@ msgid "remove member"
 msgstr "Mitglied entfernen"
 
 #: jupicp/templates/jupicp/groups_detail.html:32
-#, fuzzy
 msgid "user is manager"
 msgstr "Nutzer*in darf die Gruppe verwalten"
 
@@ -292,7 +287,6 @@ msgid "username"
 msgstr "Nutzer*innenname"
 
 #: jupicp/templates/jupicp/lists.html:5
-#, fuzzy
 msgid ""
 "Here you find a list of our (public) mailinglists. Note that you can read "
 "them on our <a href=\"//forum.junge-piraten.de\">Webforum</a> too. They are "
