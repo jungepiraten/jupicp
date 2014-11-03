@@ -235,7 +235,7 @@ class Group(DirectoryResult):
         self.members = [member for member in self._members if member != EMPTY_LIST_IDENTIFIER]
         self.owners = attrs["owner"] if "owner" in attrs else []
         self.managers = attrs["manager"] if "manager" in attrs else []
-        self.secretary = attrs["secretary"] if "secretary"] in attrs else [ANONYMOUS_IDENTIFIER, EVERYBODY_IDENTIFIER]
+        self.secretary = attrs["secretary"] if "secretary" in attrs else [ANONYMOUS_IDENTIFIER, EVERYBODY_IDENTIFIER]
 
     def set_owners(self, owners):
         conn = self.directory.generate_connection()
