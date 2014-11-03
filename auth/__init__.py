@@ -9,6 +9,9 @@ EMPTY_LIST_IDENTIFIER = "cn=empty"
 # fake-dn to identify all users. Must not be a valid user-dn
 EVERYBODY_IDENTIFIER = "cn=everybody"
 
+# fake-dn to identify guests. Must not be a valid user-dn
+ANONYMOUS_IDENTIFIER = "cn=anonymous"
+
 class Directory:
     def __init__(self, ldap_host='', bind_user='', bind_password='', user_dn_base='', group_dn_base=''):
         def get_connection():
@@ -220,6 +223,7 @@ class Group(DirectoryResult):
     members = []
     owners = []
     managers = []
+    secretary = []
 
     def fill_attrs(self, attrs):
         self.name = attrs["cn"][0]
@@ -231,6 +235,7 @@ class Group(DirectoryResult):
         self.members = [member for member in self._members if member != EMPTY_LIST_IDENTIFIER]
         self.owners = attrs["owner"] if "owner" in attrs else []
         self.managers = attrs["manager"] if "manager" in attrs else []
+        self.secretary = attrs["secretary"] if "secretary"] in attrs else [ANONYMOUS_IDENTIFIER, EVERYBODY_IDENTIFIER]
 
     def set_owners(self, owners):
         conn = self.directory.generate_connection()
@@ -287,13 +292,25 @@ class Group(DirectoryResult):
         conn = self.directory.generate_connection()
         conn.delete_s(self.dn)
 
+    def may_see(self, user):
+        if user is None:
+            return ANONYMOUS_IDENTIFIER in self.secretary
+        for secretary in self.secretary:
+            if user.match_dn(secretary):
+                return True
+        return False
+
     def may_edit(self, user):
+        if user is None:
+            return ANONYMOUS_IDENTIFIER in self.managers
         for manager in self.managers:
             if user.match_dn(manager):
                 return True
         return False
 
     def may_join(self, user):
+        if user is None:
+            return ANONYMOUS_IDENTIFIER in self.owner
         for owner in self.owners:
             if user.match_dn(owner):
                 return True

@@ -222,7 +222,7 @@ class GroupsListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(GroupsListView, self).get_context_data(**kwargs)
-        context['groups'] = settings.DIRECTORY.get_groups()
+        context['groups'] = [group for group in settings.DIRECTORY.get_groups() if group.may_see(self.request.user)]
         if self.request.user:
             context['may_create'] = self.request.user.match_dn(settings.ADMIN_DN)
         return context
@@ -247,6 +247,8 @@ class GroupsDetailView(TemplateView):
         context = super(GroupsDetailView, self).get_context_data(**kwargs)
         try:
             context['group'] = settings.DIRECTORY.get_group(kwargs["group_name"])
+            if not context['group'].may_see(self.request.user):
+                raise Exception
         except:
             raise ObjectDoesNotExist
         if self.request.user:
@@ -261,6 +263,8 @@ class GroupsDetailJSONView(utils.JSONView):
     def get(self, *args, **kwargs):
         try:
             group = settings.DIRECTORY.get_group(kwargs["group_name"])
+            if not group.may_see(self.request.user):
+                raise Exception
         except:
             raise ObjectDoesNotExist
         return {"id": group.name, "name": group.display_name, "description": group.description, "members": [user.name for user in group.get_members()]}
@@ -273,6 +277,8 @@ class GroupsDeleteView(RedirectView):
     def get_redirect_url(self, group_name):
         try:
             group = settings.DIRECTORY.get_group(group_name)
+            if not group.may_see(self.request.user):
+                raise Exception
         except:
             raise ObjectDoesNotExist
 
@@ -290,6 +296,8 @@ class GroupsMemberAddView(RedirectView):
     def get_redirect_url(self, group_name, user_name=None):
         try:
             group = settings.DIRECTORY.get_group(group_name)
+            if not group.may_see(self.request.user):
+                raise Exception
             if not user_name:
                 user_name = self.request.POST["user"]
             user = settings.DIRECTORY.get_user(user_name)
@@ -310,6 +318,8 @@ class GroupsMemberDelView(RedirectView):
     def get_redirect_url(self, group_name, user_name):
         try:
             group = settings.DIRECTORY.get_group(group_name)
+            if not group.may_see(self.request.user):
+                raise Exception
             user = settings.DIRECTORY.get_user(user_name)
         except:
             raise ObjectDoesNotExist
@@ -328,6 +338,8 @@ class GroupsManagerAddView(RedirectView):
     def get_redirect_url(self, group_name, user_name=None):
         try:
             group = settings.DIRECTORY.get_group(group_name)
+            if not group.may_see(self.request.user):
+                raise Exception
             if not user_name:
                 user_name = self.request.POST["user"]
             user = settings.DIRECTORY.get_user(user_name)
@@ -348,6 +360,8 @@ class GroupsManagerDelView(RedirectView):
     def get_redirect_url(self, group_name, user_name):
         try:
             group = settings.DIRECTORY.get_group(group_name)
+            if not group.may_see(self.request.user):
+                raise Exception
             user = settings.DIRECTORY.get_user(user_name)
         except:
             raise ObjectDoesNotExist
