@@ -6,6 +6,8 @@ import ldap.modlist
 # LDAP does not accept empty groups. Use this string to have non-empty groups. Must not be a valid user-dn
 EMPTY_LIST_IDENTIFIER = "cn=empty"
 
+# fake-dn to identify all users. Must not be a valid user-dn
+EVERYBODY_IDENTIFIER = "cn=everybody"
 
 class Directory:
     def __init__(self, ldap_host='', bind_user='', bind_password='', user_dn_base='', group_dn_base=''):
@@ -201,6 +203,8 @@ class User(DirectoryResult):
     Check if we are specified by some dn. This may either be the case it is our dn or if the dn specifies a group we are part of
     """
     def match_dn(self, dn):
+        if dn.lower() == EVERYBODY_IDENTIFIER:
+            return True
         if dn.lower() == self.dn.lower():
             return True
         if dn.lower() in self.get_group_dns():
