@@ -123,7 +123,7 @@ class User(DirectoryResult):
         try:
             conn.simple_bind_s(self.dn, password)
             return True
-        except ldap.INVALID_CREDENTIALS:
+        except (ldap.INVALID_CREDENTIALS, ldap.UNWILLING_TO_PERFORM):
             return False
 
     def get_mails(self, only_verified=False):
