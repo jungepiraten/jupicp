@@ -121,7 +121,7 @@ class User(DirectoryResult):
     def check_password(self, password):
         conn = self.directory.generate_connection()
         try:
-            conn.simple_bind_s(self.dn, password)
+            conn.simple_bind_s(self.dn, password.encode("utf-8"))
             return True
         except (ldap.INVALID_CREDENTIALS, ldap.UNWILLING_TO_PERFORM):
             return False
@@ -137,7 +137,7 @@ class User(DirectoryResult):
 
     def set_password(self, password):
         conn = self.directory.generate_connection()
-        conn.passwd_s(self.dn, None, password)
+        conn.passwd_s(self.dn, None, password.encode("utf-8"))
 
     def set_names(self, given_name, surname, common_name):
         conn = self.directory.generate_connection()
