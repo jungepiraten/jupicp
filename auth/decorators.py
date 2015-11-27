@@ -10,7 +10,8 @@ import urllib
 def require_login(view):
     def check_permission(req, *args, **kwargs):
         if not req.user:
-            return HttpResponseRedirect("{}?redirect={}".format(reverse_lazy("login"), urllib.urlencode(self.request.META["RAW_URI"])))
+            redirect_url = req.META["RAW_URI"]
+            return HttpResponseRedirect("{}?redirect={}".format(reverse_lazy("login"), urllib.quote(redirect_url)))
         return view(req, *args, **kwargs)
     return check_permission
 
@@ -18,7 +19,8 @@ def require_login(view):
 def require_dn(dn, view):
     def check_permission(req, *args, **kwargs):
         if not req.user:
-            return HttpResponseRedirect("{}?redirect={}".format(reverse_lazy("login"), urllib.urlencode(self.request.META["RAW_URI"])))
+            redirect_url = req.META["RAW_URI"]
+            return HttpResponseRedirect("{}?redirect={}".format(reverse_lazy("login"), urllib.quote(redirect_url)))
         if not req.user.match_dn(dn):
             return HttpResponseForbidden()
         return view(req, *args, **kwargs)
