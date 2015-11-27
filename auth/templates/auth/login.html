@@ -3,7 +3,7 @@
 {% load bootstrap %}
 
 {% block content %}
-<form role="form" class="form-horizontal" action="{% url "login" %}" method="post">
+<form role="form" class="form-horizontal" action="" method="post">
  {% csrf_token %}
  <input type="hidden" name="next" value="{{ next }}" />
  {{ form|bootstrap }}
