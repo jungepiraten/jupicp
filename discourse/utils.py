@@ -16,4 +16,4 @@ def calculate_sig(payload, secret):
 def verify_sig(payload, sig, secret):
     payload = urllib.unquote(payload)
     computed_sig = hmac.new(secret.encode(), payload.encode(), sha256).hexdigest()
-    return hmac.compare_digest(computed_sig, sig)
+    return sig == computed_sig

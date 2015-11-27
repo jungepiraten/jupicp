@@ -1,15 +1,17 @@
 from django.conf import settings
-from discourse import utils
+from django.views.generic import RedirectView
 
 import urllib
+from discourse import utils
+
 
 class DiscourseSSO(RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        if not utils.verify_sig(payload, sig, settings.DISCOURSE_SECRET):
+        if not utils.verify_sig(self.request.GET["sso"], self.request.GET["sig"], settings.DISCOURSE_SECRET):
             raise Http500("Signature invalid")
-        request = utils.unpack_payload(payload)
+        request = utils.unpack_payload(self.request.GET["sso"])
 
         credentials = {
             "external_id": "ucp:{}".format(self.request.user.name),
