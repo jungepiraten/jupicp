@@ -8,7 +8,11 @@ from auth import forms
 class LoginView(FormView):
     template_name = "auth/login.html"
     form_class = forms.LoginForm
-    success_url = reverse_lazy("dashboard")
+
+    def get_success_url(self):
+        if "redirect" in self.request.GET:
+            return self.request.GET["redirect"]
+        return reverse_lazy("dashboard")
 
     def form_valid(self, form):
         self.request.session["user"] = form.cleaned_data["ldap_user"].name
