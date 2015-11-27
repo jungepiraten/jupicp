@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from auth.decorators import require_login
 import auth.views
 import jupicp.views
+import discourse.views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -41,6 +42,8 @@ urlpatterns = patterns(
     url(r'^groups/(?P<group_name>[^/]+)/delete', require_login(jupicp.views.GroupsDeleteView.as_view()), name="groups_delete"),
     url(r'^groups/(?P<group_name>[^/]+)', jupicp.views.GroupsDetailView.as_view(), name="groups_detail"),
     url(r'^groups/', jupicp.views.GroupsListView.as_view(), name="groups"),
+
+    url(r'sso/discourse', require_login(discourse.views.DiscourseSSO.as_view()), name="sso_discourse"),
 
     url(r'json/groups/(?P<group_name>[^/]+)', jupicp.views.GroupsDetailJSONView.as_view()),
     url(r'json/checkUser', jupicp.views.CheckUserJSONView.as_view()),

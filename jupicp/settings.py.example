@@ -9,6 +9,9 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+DISCOURSE_LOGINURL = "https://forum.young-pirates.eu/session/sso_login"
+DISCOURSE_SECRET = "-secret-"
+
 JUPICP_USERBLACKLIST=[r'^internal']
 
 JUPICP_REGISTERMAIL={
